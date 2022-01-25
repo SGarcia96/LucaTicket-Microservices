@@ -20,6 +20,7 @@ import com.example.evento.model.EventoDTO;
 import com.example.evento.service.EventoService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -57,7 +58,9 @@ public class EventoController {
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
 	@GetMapping("/{id}")
-	public EventoDTO getEvento(@PathVariable("id") String id) {
+	public EventoDTO getEvento(
+			@Parameter(description = "ID del evento a localizar", required=true)
+			@PathVariable("id") String id) {
 		log.info("--- evento por id " + id);
 		final EventoDTO evento = eventoService.findById(id);
 		return evento;

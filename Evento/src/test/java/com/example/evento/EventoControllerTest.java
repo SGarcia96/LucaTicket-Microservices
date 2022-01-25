@@ -11,6 +11,8 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 
+import java.util.Date;
+
 public class EventoControllerTest {
 	
 	@BeforeAll
@@ -22,7 +24,7 @@ public class EventoControllerTest {
 	
 	// GET /eventos
 	@Test
-	public void shouldGetAllStudentsWithStatus200() {
+	public void shouldGetAllEventosWithStatus200() {
 		when()
 			.get()
 		.then()
@@ -34,13 +36,13 @@ public class EventoControllerTest {
 	// POST /eventos
 	@Test
 	@Disabled
-	public void shouldAddStudentWithStatus201() {
+	public void shouldAddEventoWithStatus201() {
 		Evento evento = new Evento();
 		evento.setNombre("ntest");
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
-		evento.setFechaEvento("11-11-2060");
+		evento.setFechaEvento(new Date());
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
