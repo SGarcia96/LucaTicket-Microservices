@@ -2,11 +2,23 @@ package com.example.usuario.controller;
 
 import java.net.URI;
 
-<<<<<<< HEAD:Usuario/src/main/java/com/example/demo/controller/UsuarioController.java
 import org.slf4j.Logger;
-=======
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Usuario;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Content;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -21,9 +33,9 @@ public class UsuarioController<UsuarioService, UsuarioAdapter> {
 	private UsuarioAdapter usuarioAdapter;
 	
 	@GetMapping("/{id}")
-	public UsuarioResponse getUsuario(@PathVariable Long id) {
+	public UsuarioDTO getUsuario(@PathVariable Long id) {
 		log.info("--- usuario por id " + id);
-		final Usuario usuario = usuarioService.findId(id).orElseThrow();
+		final Usuario usuario = usuarioService.findById(id).orElseThrow();
 		return UsuarioAdapter.of(usuario);
 	}
 
