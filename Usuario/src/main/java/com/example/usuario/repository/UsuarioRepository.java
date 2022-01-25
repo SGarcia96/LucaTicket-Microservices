@@ -9,7 +9,5 @@ import com.example.usuario.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-	
-	public List<Usuario> findAll();
 
 }

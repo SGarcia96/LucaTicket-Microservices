@@ -61,11 +61,14 @@ public class EventoController {
 			})
 	@PostMapping
 	public ResponseEntity<Evento> addEvento(@Valid @RequestBody Evento evento) {
+<<<<<<< HEAD
 		Evento newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
+=======
 		
 		return new ResponseEntity<>(eventoService.save(evento), HttpStatus.CREATED);
 	}
+>>>>>>> 02ea95aafe88a62affb8f5216a89ff4c735179a9
 
 		
 	@Operation(summary = "Buscar todos los eventos", description = "", tags= {"evento"})
