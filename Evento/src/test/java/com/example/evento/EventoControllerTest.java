@@ -21,9 +21,9 @@ public class EventoControllerTest {
 	
 	@BeforeAll
 	public static void setup() {
+		logger.info("------> INICIANDO TEST");
 		baseURI = "http://localhost:7777";
 		basePath = "/eventos";
-		port = 8080;
 	}
 	
 	// GET /eventos
@@ -42,7 +42,6 @@ public class EventoControllerTest {
 	@Test
 	@Disabled
 	public void shouldAddEventoWithStatus201() {
-		logger.info("eeeeeeeeeeeeeeeeeeeeeeeeee");
 		Evento evento = new Evento();
 		
 		evento.setNombre("ntest");
@@ -54,7 +53,6 @@ public class EventoControllerTest {
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
 		evento.setRecinto(new Recinto("a", "b", "c", 10));
-		logger.info(evento.toString());
 			
 		given()
 			.contentType("application/json")
@@ -64,6 +62,5 @@ public class EventoControllerTest {
 		.then()
 			.statusCode(201)
 			.body("nombre", equalTo("ntest"));
-				
 	}
 }
