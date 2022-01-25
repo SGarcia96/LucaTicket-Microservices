@@ -27,7 +27,7 @@ public class UsuarioController<UsuarioService, UsuarioAdapter> {
 		return UsuarioAdapter.of(usuario);
 	}
 
-	@Operation(summary = "Buscar estudiantes por ID", description = "Dado un ID, devuelve un objeto Usuario", tags= {"usuario"})
+	@Operation(summary = "Buscar usuario por ID", description = "Dado un ID, devuelve un objeto Usuario", tags= {"usuario"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
