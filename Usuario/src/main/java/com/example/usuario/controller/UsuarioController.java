@@ -32,9 +32,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/usuarios")
+@Tag(name = "Usuario", description = "the Usuario API")
 public class UsuarioController {
 	
 	private static final Logger log = LoggerFactory.getLogger(UsuarioController.class);
@@ -76,17 +78,7 @@ public class UsuarioController {
 			@ApiResponse(responseCode = "201", description = "Usuario añadido", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) })
 			})
-
-	@PostMapping("/")
-	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado){
-		if(resultado.hasErrors()) {
-			//Si hay problemas, manda un mensaje con todos los errores
-			throw new UsuarioDataException(ErrorUtils.formatMessage(resultado));
-		}
-		UsuarioDTO result = this.usuariosService.save(usuario);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id").buildAndExpand(result.getId()).toUri();
-		return null;
-	}
+	
 	@PostMapping
 	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario){
 

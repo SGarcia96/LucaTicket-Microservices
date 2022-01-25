@@ -46,7 +46,6 @@ public class Evento {
 	@NotEmpty
 	private float[] rangoPrecios;
 
-
 	@NotEmpty(message = "La politicaAcceso no debe ser vacío")
 	private String politicaAcceso;
 	

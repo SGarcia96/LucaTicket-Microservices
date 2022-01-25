@@ -1,8 +1,5 @@
 package com.example.usuario.model;
 
-
-
-
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -51,7 +48,6 @@ public class Usuario {
 	@NotEmpty(message = "Indica un password")
 	@Size(min = 5)
 	private String password;
-	
 	
 	@Column(name = "fecha_alta")
 	private LocalDate fechaAlta;
