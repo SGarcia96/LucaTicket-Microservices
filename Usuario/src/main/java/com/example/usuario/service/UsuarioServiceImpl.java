@@ -24,7 +24,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public UsuarioDTO save(Usuario usuario) {
 		return usuarioAdapter.of(usuarioRepository.save(usuario));
 	}
-		
 	
 	@Override
 	public List<UsuarioDTO> findAll() {

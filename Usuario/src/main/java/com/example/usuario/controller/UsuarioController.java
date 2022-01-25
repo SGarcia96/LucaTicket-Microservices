@@ -55,8 +55,8 @@ public class UsuarioController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuarios no encontrados (NO implementados)", content = @Content) })
-	@GetMapping("/eventos")
-	public List<UsuarioDTO> getAllEventos(){
+	@GetMapping("/")
+	public List<UsuarioDTO> getAllUsuarios(){
 		log.info("--- todos los eventos");
 		final List<UsuarioDTO> all = usuariosService.findAll();
 		return all;
