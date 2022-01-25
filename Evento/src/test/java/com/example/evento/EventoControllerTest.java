@@ -63,4 +63,51 @@ public class EventoControllerTest {
 			.statusCode(201)
 			.body("nombre", equalTo("ntest"));
 	}
+	
+	// POST /eventos
+	@Test
+	public void shouldReturnAnErrorMessageAndStatus400() {
+		Evento evento = new Evento();
+		evento.setNombre("");
+		evento.setDescripcionCorta("dcorta");
+		evento.setDescripcionLarga("dlarga");
+		evento.setFotoUrl("m.jpg");
+		evento.setFechaEvento(new Date(2000,04,12));
+		evento.setHoraEvento("20:00");
+		evento.setPoliticaAcceso("pacc");
+		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
+		evento.setRecinto(new Recinto("a", "b", "c", 10));
+		
+		given()
+			.contentType("application/json")
+			.body(evento)
+		.when()
+			.post()
+		.then()
+			.statusCode(400)
+			.body("error", equalTo("BAD_REQUEST"))
+//			.body("message[0]", equalTo("nombre: no debe estar vacío"))
+			.body("message[1]", equalTo("nombre: el tamaño debe estar entre 3 y 30"));
+	}
+	
+	// GET /eventos/{id}
+	@Test
+	public void shouldGetEventoByIdWithStatus200() {
+		when()
+			.get("/61f012bd80dacc7180e36747")
+		.then()
+			.statusCode(200)
+			.assertThat()
+			.body("size()", greaterThan(0))
+			.body("nombre", equalTo("eventito 2.0"));
+	}
+	
+	@Test void shouldReturnAnErrorMessageAndStatus404() {
+		when()
+			.get("/1")
+		.then()
+			.statusCode(404)
+			.body("error", equalTo("Not Found"))
+			.body("message", equalTo("Epic Fail: No existe el evento"));
+	}
 }
