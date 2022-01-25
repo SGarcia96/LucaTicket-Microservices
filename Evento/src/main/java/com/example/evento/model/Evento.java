@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document("Evento")
+@Document("eventos")
 @Data
 @NoArgsConstructor
 public class Evento {
