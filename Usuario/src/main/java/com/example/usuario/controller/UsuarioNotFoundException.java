@@ -3,6 +3,7 @@ package com.example.usuario.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+//NOT FOUND: 404
 @ResponseStatus(HttpStatus.NOT_FOUND)
 class UsuarioNotFoundException extends RuntimeException{
 	
