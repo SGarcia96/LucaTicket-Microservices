@@ -50,8 +50,8 @@ public class EventoController {
 	@GetMapping("/{id}")
 	public EventoDTO getEvento(@PathVariable Long id) {
 		log.info("--- evento por id " + id);
-		final Optional<Evento> evento = eventoService.findId(id).orElseThrow();
-		return eventoAdapter.of(evento.orElseThrow());
+		final Optional<EventoDTO> evento = eventoService.findId(id).orElseThrow();
+		return evento.orElseThrow();
 	}
 	
 	@Operation(summary = "Añade un Evento", description = "Añade un evento a la coleccion eventos", tags= {"evento"})
@@ -74,8 +74,8 @@ public class EventoController {
 	@GetMapping("/eventos")
 	public List<EventoDTO> getAllEventos(){
 		log.info("--- todos los eventos");
-		final List<Evento> all = eventoService.findAll();
-		return eventoAdapter.of(all);
+		final List<EventoDTO> all = eventoService.findAll();
+		return all;
 
 	}
 	
