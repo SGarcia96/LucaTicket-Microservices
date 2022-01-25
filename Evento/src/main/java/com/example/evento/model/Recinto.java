@@ -4,21 +4,23 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Document("Recinto")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Recinto {
 
-	@NotEmpty
+	@NotEmpty(message = "El nombre del recinto no debe ser vacío")
 	private String nombre;
 
-	@NotEmpty
+	@NotEmpty(message = "El nombre del recinto no debe ser vacío")
 	private String lugar;
 
-	@NotEmpty
+	@NotEmpty(message = "La direccion del recinto no debe ser vacío")
 	private String direccion;
 
 	@NotEmpty

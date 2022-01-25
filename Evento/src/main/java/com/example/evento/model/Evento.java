@@ -25,19 +25,19 @@ public class Evento {
 	@Size(min = 3, max = 30)
 	private String nombre;
 
-	@NotEmpty
+	@NotEmpty(message = "La descripcionCorta no debe ser vacío")
 	private String descripcionCorta;
 
-	@NotEmpty
+	@NotEmpty(message = "La descripcionLarga no debe ser vacío")
 	private String descripcionLarga;
 
-	@NotEmpty
+	@NotEmpty(message = "La fotoUrl no debe ser vacío")
 	private String fotoUrl;
 
-	@NotEmpty
-	//@FutureOrPresent
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private String fechaEvento;
+	@NotNull
+	@FutureOrPresent
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date fechaEvento;
 
 	@NotEmpty
 	//@DateTimeFormat(pattern = "hh:mm")
@@ -46,7 +46,7 @@ public class Evento {
 	@NotEmpty
 	private float[] rangoPrecios;
 
-	@NotEmpty
+	@NotEmpty(message = "La politicaAcceso no debe ser vacío")
 	private String politicaAcceso;
 
 	@NotNull
