@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
@@ -20,36 +19,36 @@ import lombok.NoArgsConstructor;
 public class Evento {
 	@Id
 	private String id;
-
+	
 	@NotEmpty
-	@Size(min = 3, max = 30)
+	@Size(min=3, max=30)
 	private String nombre;
-
+	
 	@NotEmpty
 	private String descripcionCorta;
-
+	
 	@NotEmpty
 	private String descripcionLarga;
-
-	@NotEmpty
+	
+	@NotEmpty 
 	private String fotoUrl;
-
+	
 	@NotEmpty
-	//@FutureOrPresent
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private String fechaEvento;
-
+	@FutureOrPresent
+	@DateTimeFormat(pattern="dd/MM/yyyy") 
+	private Date fechaEvento;
+	
 	@NotEmpty
-	//@DateTimeFormat(pattern = "hh:mm")
-	private String horaEvento;
-
+	@DateTimeFormat(pattern="hh:mm") 
+	private Date horaEvento;
+	
 	@NotEmpty
 	private float[] rangoPrecios;
-
+	
 	@NotEmpty
 	private String politicaAcceso;
-
-	@NotNull
+	
+	@NotEmpty
 	private Recinto recinto;
-
+	
 }
