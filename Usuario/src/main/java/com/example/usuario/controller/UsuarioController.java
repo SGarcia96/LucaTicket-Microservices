@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 =======
 import com.example.usuario.model.Usuario;
 
->>>>>>> 88bed33e3f6758a4b223781cd31c3f0f99e3cb88:Usuario/src/main/java/com/example/usuario/controller/UsuarioController.java
-
 
 @Controller
 @RequestMapping("/usuarios")
