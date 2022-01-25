@@ -36,7 +36,8 @@ si usas ResponseEntityExceptionHandler tienes un logger embebido
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	// Let Spring BasicErrorController handle the exception, we just override the status code
+	// Let Spring BasicErrorController handle the exception, we just override the
+	// status code
 	// Otra opción es hacerlo de forma individual, pero asi aglutinamos todos y
 	// podemos dar incluso distintos valores o acciones
 
@@ -61,36 +62,36 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
 		logger.info("------ handleMethodArgumentNotValid()");
-		
+
 		CustomErrorJson customError = new CustomErrorJson();
 
-		//Paso fecha pero la formatea a String con formato DD/MM/YY
+		// Paso fecha pero la formatea a String con formato DD/MM/YY
 		customError.setTimestamp(new Date());
-		//customError.setTrace(ex.getLocalizedMessage());
+		// customError.setTrace(ex.getLocalizedMessage());
 		customError.setStatus(status.value());
 		customError.setError(status.name());
-		
+
 		// Get all errors indicando el campo en el que falla
 		List<String> messages = new ArrayList<String>();
 		for (FieldError error : ex.getBindingResult().getFieldErrors()) {
 			messages.add(error.getField() + ": " + error.getDefaultMessage());
 		}
 		customError.setMessage(messages);
-		
-		//Para recoger el path y simular de forma completa los datos originales
+
+		// Para recoger el path y simular de forma completa los datos originales
 		// request.getDescription(false) ---> uri=/students
 		String uri = request.getDescription(false);
-		uri = uri.substring(uri.lastIndexOf("=")+1);
+		uri = uri.substring(uri.lastIndexOf("=") + 1);
 		customError.setPath(uri);
 
 		return new ResponseEntity<>(customError, headers, status);
 
 	}
 
-	
 	// A este método se llama cuando se haga una peticion no existente, por ejemplo,
 	// una URI de tipo GET que se haga con POST
-	// En este caso uso no uso la clase personalziada de errores para ver como se haría en ese caso
+	// En este caso uso no uso la clase personalziada de errores para ver como se
+	// haría en ese caso
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {

@@ -1,5 +1,7 @@
 package com.example.evento.controller.error;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +10,7 @@ import lombok.Data;
 
 @Data
 public class CustomErrorJson {
-	
+
 	private String timestamp;
 	private int status;
 	private String error;
@@ -39,5 +41,15 @@ public class CustomErrorJson {
 		this.message = message;
 		this.path = path;
 		this.jdk = jdk;
+	}
+
+	// Variacion
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = this.changeTimeStamp(timestamp);
+	}
+
+	public String changeTimeStamp(Date d) {
+		final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		return dateFormat.format(d);
 	}
 }
