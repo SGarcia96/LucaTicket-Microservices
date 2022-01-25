@@ -33,8 +33,10 @@ public class Usuario {
 			example = "1", 
 			required = true)
 	private long id;
+	
 	@NotEmpty(message = "El nombre no debde ser vacío")
 	private String firstName;
+	
 	@NotEmpty(message = "Necesitamos que indigues un apellido")
 	private String lastName;
 	
