@@ -72,7 +72,7 @@ public class EventoController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
-	@GetMapping("/eventos")
+	@GetMapping("/")
 	public List<EventoDTO> getAllEventos(){
 		log.info("--- todos los eventos");
 		final List<EventoDTO> all = eventoService.findAll();
