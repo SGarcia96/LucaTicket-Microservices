@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.model.Evento;
+import com.example.evento.model.EventoDTO;
 import com.example.evento.service.EventoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,20 +44,20 @@ public class EventoController {
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
 	@GetMapping("/{id}")
-	public EventoResponse getEvento(@PathVariable Long id) {
+	public EventoDTO getEvento(@PathVariable Long id) {
 		log.info("--- evento por id " + id);
 		final Optional<Evento> evento = eventoService.findId(id).orElseThrow();
-		return eventoAdapter.of(evento);
+		return eventoAdapter.of(evento.orElseThrow());
 	}
 	
 	@Operation(summary = "Buscar todos los eventos", description = "", tags= {"evento"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
 	@GetMapping("/eventos")
-	public List<EventoResponse> getAllEventos(){
+	public List<EventoDTO> getAllEventos(){
 		log.info("--- todos los eventos");
 		final List<Evento> all = eventoService.findAll();
 		return eventoAdapter.of(all);
