@@ -40,7 +40,7 @@ public class EventoControllerTest {
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
-		evento.setFechaEvento("11-11-2060");
+//		evento.setFechaEvento("11-11-2060");
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
