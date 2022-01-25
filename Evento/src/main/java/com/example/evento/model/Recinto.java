@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Recinto {
 
-	@NotEmpty
+	@NotEmpty(message = "El nombre del recinto no debe ser vacío")
 	private String nombre;
 
-	@NotEmpty
+	@NotEmpty(message = "El nombre del recinto no debe ser vacío")
 	private String lugar;
 
-	@NotEmpty
+	@NotEmpty(message = "La direccion del recinto no debe ser vacío")
 	private String direccion;
 
 	@NotEmpty

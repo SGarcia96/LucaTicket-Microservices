@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
+@Validated
 @RequestMapping("/eventos")
 @Tag(name = "evento", description = "Evento API")
 public class EventoController {
@@ -34,6 +36,19 @@ public class EventoController {
 	
 	@Autowired
 	private EventoService eventoService;
+	
+	@Operation(summary = "Buscar todos los eventos", description = "devuelve todos los eventos registrados", tags= {"evento"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
+	@GetMapping
+	public List<EventoDTO> getAllEventos(){
+		log.info("--- todos los eventos");
+		final List<EventoDTO> all = eventoService.findAll();
+		return all;
+	}
 	
 	@Operation(summary = "Buscar eventos por ID", description = "Dado un ID, devuelve un objeto Evento", tags= {"evento"})
 	@ApiResponses(value = {
@@ -57,21 +72,6 @@ public class EventoController {
 	public ResponseEntity<EventoDTO> addEvento(@Valid @RequestBody Evento evento) {
 		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
-	}
-
-		
-	@Operation(summary = "Buscar todos los eventos", description = "", tags= {"evento"})
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
-	@GetMapping
-	public List<EventoDTO> getAllEventos(){
-		log.info("--- todos los eventos");
-		final List<EventoDTO> all = eventoService.findAll();
-		return all;
-
 	}
 	
 }
