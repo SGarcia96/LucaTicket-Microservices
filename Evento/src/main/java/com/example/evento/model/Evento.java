@@ -30,7 +30,7 @@ public class Evento {
 	@NotEmpty
 	private String descripcionLarga;
 	
-	@NotEmpty
+	@NotEmpty 
 	private String fotoUrl;
 	
 	@NotEmpty
@@ -47,7 +47,8 @@ public class Evento {
 	
 	@NotEmpty
 	private String politicaAcceso;
-	 	
-	// private Recinto recinto;
+	
+	@NotEmpty
+	private Recinto recinto;
 	
 }
