@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -34,22 +34,23 @@ public class Usuario {
 			required = true)
 	private long id;
 	
-	@NotNull
+	@NotEmpty
 	@Size(min = 3, max = 30)
 	private String nombre;
 	
-	@NotNull
+	@NotEmpty
 	@Size(min = 3, max = 30)
 	private String apellido;
 	
-	@NotNull
+	@NotEmpty
 	@Email
 	private String mail;
 	
-	@NotNull
+	@NotEmpty
 	@Size(min = 5)
 	private String password;
 	
+	@NotEmpty
 	@Positive
 	@Column(name = "fecha_alta")
 	private Date fechaAlta;
