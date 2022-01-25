@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Document("Evento")
 @Data
 @NoArgsConstructor
-public class Evento {
+public class EventoDTO {
 	@Id
 	private String id;
 	
