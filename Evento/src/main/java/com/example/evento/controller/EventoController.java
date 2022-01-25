@@ -50,7 +50,7 @@ public class EventoController {
 	@GetMapping("/{id}")
 	public EventoDTO getEvento(@PathVariable("id") String id) {
 		log.info("--- evento por id " + id);
-		final Optional<Evento> evento = eventoService.findId(id).orElseThrow();
+		final Optional<Evento> evento = eventoService.findById(id).orElseThrow();
 		return eventoAdapter.of(evento.orElseThrow());
 	}
 	
