@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.model.Evento;
 import com.example.evento.model.EventoDTO;
 import com.example.evento.service.EventoService;
@@ -49,7 +51,7 @@ public class EventoController {
 	public EventoDTO getEvento(@PathVariable Long id) {
 		log.info("--- evento por id " + id);
 		final Optional<Evento> evento = eventoService.findId(id).orElseThrow();
-		return eventoAdapter.of(evento);
+		return eventoAdapter.of(evento.orElseThrow());
 	}
 	
 	@Operation(summary = "Añade un Evento", description = "Añade un evento a la coleccion eventos", tags= {"evento"})
@@ -67,7 +69,7 @@ public class EventoController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
 	@GetMapping("/eventos")
 	public List<EventoDTO> getAllEventos(){
