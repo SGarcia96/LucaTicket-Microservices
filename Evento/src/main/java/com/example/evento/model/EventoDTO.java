@@ -48,6 +48,7 @@ public class EventoDTO {
 	@NotEmpty
 	private String politicaAcceso;
 	 	
-	// private Recinto recinto;
+	@NotEmpty
+	private Recinto recinto;
 	
 }
