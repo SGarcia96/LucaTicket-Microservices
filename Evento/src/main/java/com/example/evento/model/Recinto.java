@@ -1,7 +1,5 @@
 package com.example.evento.model;
 
-import java.util.Date;
-
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,14 +14,14 @@ public class Recinto {
 
 	@NotEmpty
 	private String nombre;
-	
+
 	@NotEmpty
 	private String lugar;
-	
+
 	@NotEmpty
 	private String direccion;
-	
+
 	@NotEmpty
 	private int aforo;
-	
+
 }

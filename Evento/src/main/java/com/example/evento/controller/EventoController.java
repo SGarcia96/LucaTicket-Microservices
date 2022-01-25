@@ -48,10 +48,10 @@ public class EventoController {
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
 	@GetMapping("/{id}")
-	public EventoDTO getEvento(@PathVariable Long id) {
+	public EventoDTO getEvento(@PathVariable("id") String id) {
 		log.info("--- evento por id " + id);
-		final Optional<Evento> evento = eventoService.findId(id).orElseThrow();
-		return eventoAdapter.of(evento.orElseThrow());
+		final EventoDTO evento = eventoService.findById(id);
+		return evento;
 	}
 	
 	@Operation(summary = "Añade un Evento", description = "Añade un evento a la coleccion eventos", tags= {"evento"})
@@ -60,9 +60,9 @@ public class EventoController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) })
 			})
 	@PostMapping
-	public ResponseEntity<Evento> addEvento(@Valid @RequestBody Evento evento) {
-		
-		return new ResponseEntity<>(eventoService.save(evento), HttpStatus.CREATED);
+	public ResponseEntity<EventoDTO> addEvento(@Valid @RequestBody Evento evento) {
+		EventoDTO newEvento = eventoService.save(evento);
+		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
 	}
 
 		
@@ -75,8 +75,8 @@ public class EventoController {
 	@GetMapping("/eventos")
 	public List<EventoDTO> getAllEventos(){
 		log.info("--- todos los eventos");
-		final List<Evento> all = eventoService.findAll();
-		return eventoAdapter.of(all);
+		final List<EventoDTO> all = eventoService.findAll();
+		return all;
 
 	}
 	
