@@ -24,7 +24,7 @@ public class EventoControllerTest {
 	
 	// GET /eventos
 	@Test
-	public void shouldGetAllStudentsWithStatus200() {
+	public void shouldGetAllEventosWithStatus200() {
 		when()
 			.get()
 		.then()
@@ -36,13 +36,17 @@ public class EventoControllerTest {
 	// POST /eventos
 	@Test
 	@Disabled
-	public void shouldAddStudentWithStatus201() {
+	public void shouldAddEventoWithStatus201() {
 		Evento evento = new Evento();
 		evento.setNombre("ntest");
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
+<<<<<<< HEAD
 		evento.setFechaEvento(new Date("11-11-2060"));
+=======
+		evento.setFechaEvento(new Date());
+>>>>>>> dfe7429db11336e98254f5a5e70e39522ff43157
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});

@@ -1,0 +1,5 @@
+package com.example.evento.controller.error;
+
+public class CustomErrorAttributes {
+
+}

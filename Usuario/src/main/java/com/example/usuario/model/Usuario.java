@@ -36,7 +36,6 @@ public class Usuario {
 			required = true)
 	private long id;
 	
-	
 	@NotEmpty(message = "El nombre no debde ser vacío")
 	@Size(min = 3, max = 30)
 	private String nombre;
@@ -45,11 +44,11 @@ public class Usuario {
 	@Size(min = 3, max = 30)
 	private String apellido;
 	
-	@NotEmpty
+	@NotEmpty(message = "El mail no debe ser vacio")
 	@Email
 	private String mail;
 	
-	@NotEmpty
+	@NotEmpty(message = "Indica un password")
 	@Size(min = 5)
 	private String password;
 	
