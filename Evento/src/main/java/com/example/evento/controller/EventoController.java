@@ -40,10 +40,9 @@ public class EventoController {
 	@Autowired
 	private EventoService eventoService;
 	
-<<<<<<< HEAD
 	@Autowired
 	private EventoAdapter eventoAdapter;
-=======
+
 	@Operation(summary = "Buscar todos los eventos", description = "devuelve todos los eventos registrados", tags= {"evento"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
@@ -56,7 +55,6 @@ public class EventoController {
 		final List<EventoDTO> all = eventoService.findAll();
 		return all;
 	}
->>>>>>> d83016854ff64a76eed01bf257ea23332c84ed1d
 	
 	@Operation(summary = "Buscar eventos por ID", description = "Dado un ID, devuelve un objeto Evento", tags= {"evento"})
 	@ApiResponses(value = {
@@ -81,22 +79,5 @@ public class EventoController {
 		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
 	}
-<<<<<<< HEAD
 
-		
-	@Operation(summary = "Buscar todos los eventos", description = "", tags= {"evento"})
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
-	@GetMapping("/")
-	public List<EventoDTO> getAllEventos(){
-		log.info("--- todos los eventos");
-		final List<EventoDTO> all = eventoService.findAll();
-		return all;
-	}
-=======
->>>>>>> d83016854ff64a76eed01bf257ea23332c84ed1d
-	
 }

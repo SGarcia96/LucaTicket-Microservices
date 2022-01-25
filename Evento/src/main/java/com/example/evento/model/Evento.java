@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
@@ -23,23 +24,6 @@ public class Evento {
 	@NotEmpty
 	@Size(min=3, max=30)
 	private String nombre;
-<<<<<<< HEAD
-	
-	@NotEmpty
-	private String descripcionCorta;
-	
-	@NotEmpty
-	private String descripcionLarga;
-	
-	@NotEmpty 
-	private String fotoUrl;
-	
-	@NotEmpty
-	@FutureOrPresent
-	@DateTimeFormat(pattern="dd/MM/yyyy") 
-	private Date fechaEvento;
-	
-=======
 
 	@NotEmpty(message = "La descripcionCorta no debe ser vacío")
 	private String descripcionCorta;
@@ -55,20 +39,15 @@ public class Evento {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date fechaEvento;
 
->>>>>>> d83016854ff64a76eed01bf257ea23332c84ed1d
 	@NotEmpty
 	@DateTimeFormat(pattern="hh:mm") 
-	private Date horaEvento;
+	private String horaEvento;
 	
 	@NotEmpty
 	private float[] rangoPrecios;
-<<<<<<< HEAD
-	
-	@NotEmpty
-=======
+
 
 	@NotEmpty(message = "La politicaAcceso no debe ser vacío")
->>>>>>> d83016854ff64a76eed01bf257ea23332c84ed1d
 	private String politicaAcceso;
 	
 	@NotEmpty
