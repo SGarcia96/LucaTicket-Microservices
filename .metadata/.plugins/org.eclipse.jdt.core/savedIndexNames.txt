@@ -8,7 +8,6 @@ INDEX VERSION 1.131+C:\Users\alumno\proyecto\.metadata\.plugins\org.eclipse.jdt.
 2279858500.index
 2461571953.index
 1291341494.index
-4269460827.index
 335211976.index
 1400866673.index
 1514443761.index
@@ -20,7 +19,6 @@ INDEX VERSION 1.131+C:\Users\alumno\proyecto\.metadata\.plugins\org.eclipse.jdt.
 3859940328.index
 4110813735.index
 2288177.index
-2507455363.index
 2817848429.index
 3613001352.index
 2302614885.index
