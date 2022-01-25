@@ -23,7 +23,7 @@ public class EventoDTO {
 	private String descripcionCorta;
 	private String descripcionLarga;
 	private String fotoUrl;
-	private String fechaEvento;
+	private Date fechaEvento;
 	private String horaEvento;
 	private float[] rangoPrecios;
 	private String politicaAcceso;

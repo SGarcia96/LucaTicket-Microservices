@@ -34,10 +34,10 @@ public class Evento {
 	@NotEmpty
 	private String fotoUrl;
 
-	@NotEmpty
-	//@FutureOrPresent
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private String fechaEvento;
+	@NotNull
+	@FutureOrPresent
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date fechaEvento;
 
 	@NotEmpty
 	//@DateTimeFormat(pattern = "hh:mm")
