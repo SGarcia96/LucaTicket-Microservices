@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.model.Evento;
 import com.example.evento.model.EventoDTO;
 import com.example.evento.repository.EventoRepository;
-import com.google.common.base.Optional;
 
 public class EventoServiceImpl implements EventoService {
 
@@ -16,16 +16,16 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public EventoDTO save(Evento evento) {
-		return eventoRepository.save(evento);
+		return EventoAdapter.of(eventoRepository.save(evento));
 	}
 
 	@Override
 	public List<EventoDTO> findAll() {
-		return eventoRepository.findAll();
+		return EventoAdapter.of(eventoRepository.findAll());
 	}
 
 	@Override
-	public Optional<EventoDTO> findById(String id) {
-		return eventoRepository.findById(id);
+	public EventoDTO findById(String id) {
+		return EventoAdapter.of(eventoRepository.findById(id).orElseThrow());
 	}
 }

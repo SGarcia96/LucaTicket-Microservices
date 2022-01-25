@@ -11,7 +11,7 @@ import com.example.evento.model.EventoDTO;
 @Component
 public class EventoAdapter {
 	
-	public EventoDTO of(Evento evento) {
+	public static EventoDTO of(Evento evento) {
 		EventoDTO eventoDTO= new EventoDTO();
 		eventoDTO.setId(evento.getId());
 		eventoDTO.setNombre(evento.getNombre());
@@ -25,7 +25,7 @@ public class EventoAdapter {
 		return eventoDTO;
 	}
 	
-	public List<EventoDTO> of(List<Evento> eventos){
+	public static List<EventoDTO> of(List<Evento> eventos){
 		return eventos.stream()
 				.map(p -> of(p))
 				.collect(Collectors.toList());
