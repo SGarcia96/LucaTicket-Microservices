@@ -13,6 +13,7 @@ public class UsuarioAdapter {
 
 	public UsuarioDTO of(Usuario usuario) {
 		UsuarioDTO usuarioDto = new UsuarioDTO();
+		usuarioDto.setId(usuario.getId());
 		usuarioDto.setNombre(usuario.getNombre());
 		usuarioDto.setApellido(usuario.getApellido());
 		usuarioDto.setMail(usuario.getMail());
