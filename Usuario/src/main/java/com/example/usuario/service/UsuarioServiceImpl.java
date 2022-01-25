@@ -1,5 +1,9 @@
 package com.example.usuario.service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+//import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	
 	@Override
 	public UsuarioDTO save(Usuario usuario) {
+		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
 		return usuarioAdapter.of(usuarioRepository.save(usuario));
 	}
 	

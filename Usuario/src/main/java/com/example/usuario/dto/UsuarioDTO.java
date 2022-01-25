@@ -1,7 +1,7 @@
 package com.example.usuario.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -19,6 +19,6 @@ public class UsuarioDTO implements Serializable{
 	private String apellido;
 	private String mail;
 	private String password;
-	private Date fechaAlta;
+	private LocalDate fechaAlta;
 
 }
