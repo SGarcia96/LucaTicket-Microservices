@@ -1,6 +1,9 @@
 package com.example.usuario.model;
 
-import java.sql.Date;
+
+
+
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,29 +35,24 @@ public class Usuario {
 			example = "1", 
 			required = true)
 	private long id;
-	@NotEmpty(message = "El nombre no debde ser vacío")
-	private String firstName;
-	@NotEmpty(message = "Necesitamos que indigues un apellido")
-	private String lastName;
 	
-	@NotEmpty
+	@NotEmpty(message = "El nombre no debde ser vacío")
 	@Size(min = 3, max = 30)
 	private String nombre;
 	
-	@NotEmpty
+	@NotEmpty(message = "Necesitamos que indigues un apellido")
 	@Size(min = 3, max = 30)
 	private String apellido;
 	
-	@NotEmpty
+	@NotEmpty(message = "El mail no debe ser vacio")
 	@Email
 	private String mail;
 	
-	@NotEmpty
+	@NotEmpty(message = "Indica un password")
 	@Size(min = 5)
 	private String password;
 	
-	@NotEmpty
-	@Positive
+	
 	@Column(name = "fecha_alta")
-	private Date fechaAlta;
+	private LocalDate fechaAlta;
 }
