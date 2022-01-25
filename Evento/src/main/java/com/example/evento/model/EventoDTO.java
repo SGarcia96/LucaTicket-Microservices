@@ -19,36 +19,14 @@ import lombok.NoArgsConstructor;
 public class EventoDTO {
 	@Id
 	private String id;
-	
-	@NotEmpty
-	@Size(min=3, max=30)
 	private String nombre;
-	
-	@NotEmpty
 	private String descripcionCorta;
-	
-	@NotEmpty
 	private String descripcionLarga;
-	
-	@NotEmpty
 	private String fotoUrl;
-	
-	@NotEmpty
-	@FutureOrPresent
-	@DateTimeFormat(pattern="dd/MM/yyyy") 
-	private Date fechaEvento;
-	
-	@NotEmpty
-	@DateTimeFormat(pattern="hh:mm") 
-	private Date horaEvento;
-	
-	@NotEmpty
+	private String fechaEvento;
+	private String horaEvento;
 	private float[] rangoPrecios;
-	
-	@NotEmpty
 	private String politicaAcceso;
-	 	
-	@NotEmpty
 	private Recinto recinto;
-	
+
 }
