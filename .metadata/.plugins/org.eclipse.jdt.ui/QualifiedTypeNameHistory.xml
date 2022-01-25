@@ -14,4 +14,7 @@
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.Operation"/>
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.responses.ApiResponses"/>
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.media.Content"/>
+    <fullyQualifiedTypeName name="org.springframework.test.context.ActiveProfiles"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeAll"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
 </qualifiedTypeNameHistroy>
