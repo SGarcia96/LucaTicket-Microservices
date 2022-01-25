@@ -23,6 +23,7 @@ public class Evento {
 	@NotEmpty
 	@Size(min=3, max=30)
 	private String nombre;
+<<<<<<< HEAD
 	
 	@NotEmpty
 	private String descripcionCorta;
@@ -38,14 +39,36 @@ public class Evento {
 	@DateTimeFormat(pattern="dd/MM/yyyy") 
 	private Date fechaEvento;
 	
+=======
+
+	@NotEmpty(message = "La descripcionCorta no debe ser vacío")
+	private String descripcionCorta;
+
+	@NotEmpty(message = "La descripcionLarga no debe ser vacío")
+	private String descripcionLarga;
+
+	@NotEmpty(message = "La fotoUrl no debe ser vacío")
+	private String fotoUrl;
+
+	@NotNull
+	@FutureOrPresent
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date fechaEvento;
+
+>>>>>>> d83016854ff64a76eed01bf257ea23332c84ed1d
 	@NotEmpty
 	@DateTimeFormat(pattern="hh:mm") 
 	private Date horaEvento;
 	
 	@NotEmpty
 	private float[] rangoPrecios;
+<<<<<<< HEAD
 	
 	@NotEmpty
+=======
+
+	@NotEmpty(message = "La politicaAcceso no debe ser vacío")
+>>>>>>> d83016854ff64a76eed01bf257ea23332c84ed1d
 	private String politicaAcceso;
 	
 	@NotEmpty

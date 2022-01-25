@@ -24,7 +24,11 @@ public class EventoDTO {
 	private String descripcionLarga;
 	private String fotoUrl;
 	private Date fechaEvento;
+<<<<<<< HEAD
 	private Date horaEvento;
+=======
+	private String horaEvento;
+>>>>>>> d83016854ff64a76eed01bf257ea23332c84ed1d
 	private float[] rangoPrecios;
 	private String politicaAcceso;
 	private Recinto recinto;
