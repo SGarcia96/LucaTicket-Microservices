@@ -78,7 +78,10 @@ public class UsuarioController {
 			@ApiResponse(responseCode = "201", description = "Usuario añadido", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) })
 			})
+<<<<<<< HEAD
 	
+=======
+>>>>>>> d4b8ff99250a5dfb8c9932d7cfc6525a3f27a59d
 	@PostMapping
 	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario){
 
