@@ -3,12 +3,14 @@ package com.example.evento.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.model.Evento;
 import com.example.evento.model.EventoDTO;
 import com.example.evento.repository.EventoRepository;
 
+@Service
 public class EventoServiceImpl implements EventoService {
 
 	@Autowired

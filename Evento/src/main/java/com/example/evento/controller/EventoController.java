@@ -1,10 +1,8 @@
 package com.example.evento.controller;
 
-import java.net.URI;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.model.Evento;
 import com.example.evento.model.EventoDTO;
 import com.example.evento.service.EventoService;
@@ -37,9 +34,6 @@ public class EventoController {
 	
 	@Autowired
 	private EventoService eventoService;
-	
-	@Autowired
-	private EventoAdapter eventoAdapter;
 	
 	@Operation(summary = "Buscar eventos por ID", description = "Dado un ID, devuelve un objeto Evento", tags= {"evento"})
 	@ApiResponses(value = {
@@ -72,7 +66,7 @@ public class EventoController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
-	@GetMapping("/eventos")
+	@GetMapping
 	public List<EventoDTO> getAllEventos(){
 		log.info("--- todos los eventos");
 		final List<EventoDTO> all = eventoService.findAll();
