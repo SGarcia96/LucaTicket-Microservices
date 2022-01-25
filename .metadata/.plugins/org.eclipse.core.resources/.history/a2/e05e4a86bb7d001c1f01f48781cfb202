@@ -1,4 +1,4 @@
-package controller;
+package com.example.evento.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
