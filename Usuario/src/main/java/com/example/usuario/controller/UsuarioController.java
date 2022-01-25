@@ -1,13 +1,18 @@
 package com.example.usuario.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Usuario;
@@ -45,13 +50,18 @@ public class UsuarioController<UsuarioService, UsuarioAdapter> {
 		return UsuarioAdapter.of(usuario);
 	}
 	
-	@GetMapping("/usuarios")
+	@GetMapping("/")
 	public String findAllUsuarios(Model m) {
 		m.addAttribute("usuarios", usuariosService.findAllUsuarios());
 		log.info(usuarioService.findAllUsuarios().toString());
 		log.info("en el metodo findAllUsuarios del controller");
 		return "listaUsuarios";
 
+	}
+	
+	@PostMapping("/")
+	public ResponseEntity<?> addUsuario(@Valid @ResponseBody Usuario usuario){
+		
 	}
 
 }
