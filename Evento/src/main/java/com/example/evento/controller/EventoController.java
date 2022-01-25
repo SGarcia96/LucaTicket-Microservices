@@ -50,8 +50,8 @@ public class EventoController {
 	@GetMapping("/{id}")
 	public EventoDTO getEvento(@PathVariable("id") String id) {
 		log.info("--- evento por id " + id);
-		final Optional<EventoDTO> evento = eventoService.findId(id).orElseThrow();
-		return evento.orElseThrow();
+		final EventoDTO evento = eventoService.findById(id);
+		return evento;
 	}
 	
 	@Operation(summary = "Añade un Evento", description = "Añade un evento a la coleccion eventos", tags= {"evento"})
@@ -60,11 +60,9 @@ public class EventoController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) })
 			})
 	@PostMapping
-	public ResponseEntity<Evento> addEvento(@Valid @RequestBody Evento evento) {
-		Evento newEvento = eventoService.save(evento);
+	public ResponseEntity<EventoDTO> addEvento(@Valid @RequestBody Evento evento) {
+		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
-		
-		return new ResponseEntity<>(eventoService.save(evento), HttpStatus.CREATED);
 	}
 
 		
