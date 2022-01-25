@@ -1,6 +1,9 @@
 package com.example.usuario.model;
 
-import java.sql.Date;
+
+
+
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -54,8 +56,7 @@ public class Usuario {
 	@Size(min = 5)
 	private String password;
 	
-	@NotEmpty
-	@Positive
+	
 	@Column(name = "fecha_alta")
-	private Date fechaAlta;
+	private LocalDate fechaAlta;
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Usuario;
@@ -25,7 +26,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
-@Controller
+@RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
 	
@@ -55,7 +56,7 @@ public class UsuarioController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuarios no encontrados (NO implementados)", content = @Content) })
-	@GetMapping("/")
+	@GetMapping
 	public List<UsuarioDTO> getAllUsuarios(){
 		log.info("--- todos los eventos");
 		final List<UsuarioDTO> all = usuariosService.findAll();
@@ -68,7 +69,7 @@ public class UsuarioController {
 			@ApiResponse(responseCode = "201", description = "Usuario añadido", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) })
 			})
-	@PostMapping("/")
+	@PostMapping
 	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario){
 		return new ResponseEntity<>(usuariosService.save(usuario), HttpStatus.CREATED);
 	}
