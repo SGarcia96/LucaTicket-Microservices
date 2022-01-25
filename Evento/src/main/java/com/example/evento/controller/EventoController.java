@@ -61,6 +61,7 @@ public class EventoController {
 	public ResponseEntity<Evento> addEvento(@Valid @RequestBody Evento evento) {
 		
 		return new ResponseEntity<>(eventoService.save(evento), HttpStatus.CREATED);
+	}
 
 		
 	@Operation(summary = "Buscar todos los eventos", description = "", tags= {"evento"})
