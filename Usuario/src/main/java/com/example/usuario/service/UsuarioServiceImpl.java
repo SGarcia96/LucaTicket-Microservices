@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.usuario.adapter.UsuarioAdapter;
+import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Usuario;
 import com.example.usuario.repository.UsuarioRepository;
 
@@ -15,21 +17,18 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	private UsuarioAdapter usuarioAdapter;
+	
 	@Override
-	public Usuario save(Usuario usuario) {
-		return usuarioRepository.save(usuario);
+	public UsuarioDTO save(Usuario usuario) {
+		return usuarioAdapter.of(usuarioRepository.save(usuario));
+	}
 		
 	
 	@Override
-	public List<Usuario> findAll() {
-		return usuarioRepository.findAll();
-		}
-	}
-
-	@Override
-	public List<Usuario> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UsuarioDTO> findAll() {
+		return usuarioAdapter.of(usuarioRepository.findAll());
 	}
 
 }
