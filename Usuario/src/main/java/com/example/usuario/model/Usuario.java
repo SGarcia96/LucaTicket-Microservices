@@ -36,7 +36,7 @@ public class Usuario {
 			required = true)
 	private long id;
 	
-	@NotEmpty(message = "El nombre no debe ser vacío")
+	@NotEmpty(message = "El nombre no debde ser vacío")
 	@Size(min = 3, max = 30)
 	private String nombre;
 	
