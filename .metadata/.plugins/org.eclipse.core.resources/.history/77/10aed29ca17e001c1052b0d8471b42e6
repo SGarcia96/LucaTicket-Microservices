@@ -67,7 +67,7 @@ public class EventoControllerTest {
 	// POST /eventos
 	@SuppressWarnings("deprecation")
 	@Test
-	public void shouldReturnAnErrorMessageAndStatus400WhenAnAttributteIsEmpty() {
+	public void shouldReturnAnErrorMessageAndStatus400() {
 		Evento evento = new Evento();
 		evento.setNombre("");
 		evento.setDescripcionCorta("dcorta");
@@ -105,7 +105,7 @@ public class EventoControllerTest {
 	
 	// GET /eventos/{id}
 	@Test 
-	void shouldReturnAnErrorMessageAndStatus404WhenIdNotExist() {
+	void shouldReturnAnErrorMessageAndStatus404() {
 		when()
 			.get("/1")
 		.then()
@@ -123,5 +123,5 @@ public class EventoControllerTest {
 		.then()
 			.statusCode(200);
 	}
-		
+	
 }

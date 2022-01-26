@@ -67,7 +67,7 @@ public class EventoControllerTest {
 	// POST /eventos
 	@SuppressWarnings("deprecation")
 	@Test
-	public void shouldReturnAnErrorMessageAndStatus400WhenAnAttributteIsEmpty() {
+	public void shouldReturnAnErrorMessageAndStatus400() {
 		Evento evento = new Evento();
 		evento.setNombre("");
 		evento.setDescripcionCorta("dcorta");
@@ -103,9 +103,7 @@ public class EventoControllerTest {
 			.body("nombre", equalTo("eventito 2.0"));
 	}
 	
-	// GET /eventos/{id}
-	@Test 
-	void shouldReturnAnErrorMessageAndStatus404WhenIdNotExist() {
+	@Test void shouldReturnAnErrorMessageAndStatus404() {
 		when()
 			.get("/1")
 		.then()
@@ -113,15 +111,4 @@ public class EventoControllerTest {
 			.body("error", equalTo("Not Found"))
 			.body("message", equalTo("Epic Fail: No existe el evento"));
 	}
-	
-	// DELETE /eventos/{id}
-	@Test
-	@Disabled
-	public void shouldReturnStatus200WhenDeleteSuccessful() {
-		when()
-			.delete("/61f012bd80dacc7180e36747")
-		.then()
-			.statusCode(200);
-	}
-		
 }
