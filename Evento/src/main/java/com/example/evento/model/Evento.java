@@ -1,6 +1,6 @@
 package com.example.evento.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,11 +38,11 @@ public class Evento {
 
 	@NotNull
 	@FutureOrPresent
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date fechaEvento;
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
+	private LocalDate fechaEvento;
 
 	@NotEmpty
-	//@DateTimeFormat(pattern = "hh:mm")
+	@JsonFormat(pattern = "hh:mm")
 	private String horaEvento;
 
 	@NotEmpty
