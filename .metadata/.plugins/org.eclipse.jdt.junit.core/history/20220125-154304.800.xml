@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="EventoControllerTest" project="Evento" tests="2" started="2" failures="0" errors="0" ignored="1">
-  <testsuite name="com.example.evento.EventoControllerTest" time="6.493" displayname="EventoControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.example.evento.EventoControllerTest]">
-    <testcase name="shouldGetAllStudentsWithStatus200" classname="com.example.evento.EventoControllerTest" time="6.475" displayname="shouldGetAllStudentsWithStatus200()" uniqueid="[engine:junit-jupiter]/[class:com.example.evento.EventoControllerTest]/[method:shouldGetAllStudentsWithStatus200()]"/>
-    <testcase name="shouldAddStudentWithStatus201" classname="com.example.evento.EventoControllerTest" time="0.0" ignored="true" displayname="shouldAddStudentWithStatus201()" uniqueid="[engine:junit-jupiter]/[class:com.example.evento.EventoControllerTest]/[method:shouldAddStudentWithStatus201()]"/>
-  </testsuite>
-</testrun>

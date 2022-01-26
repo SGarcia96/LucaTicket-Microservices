@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,6 +76,19 @@ public class EventoController {
 	public ResponseEntity<EventoDTO> addEvento(@Valid @RequestBody Evento evento) {
 		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
+	}
+
+	@Operation(summary = "Eliminar un evento por ID", description = "Dado un ID, elimina el evento", tags = {
+			"evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Evento eliminado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (ID no existe)", content = @Content) })
+	@DeleteMapping("/{id}")
+	public void deleteEvento(
+			@Parameter(description = "ID del evento a localizar", required = true) @PathVariable("id") String id) {
+		log.info("--- deleteEvento con id " + id);
+		eventoService.deleteById(id);
 	}
 
 }

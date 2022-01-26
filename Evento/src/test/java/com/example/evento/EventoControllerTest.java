@@ -65,6 +65,7 @@ public class EventoControllerTest {
 	}
 	
 	// POST /eventos
+	@SuppressWarnings("deprecation")
 	@Test
 	public void shouldReturnAnErrorMessageAndStatus400() {
 		Evento evento = new Evento();
