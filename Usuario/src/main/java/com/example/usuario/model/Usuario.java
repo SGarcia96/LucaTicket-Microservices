@@ -26,7 +26,6 @@ import lombok.NoArgsConstructor;
                    @UniqueConstraint(columnNames = "mail")
                   }
 )
-//@Table(name = "usuarios")
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "Usuario", description = "Clase Usuario")
@@ -53,11 +52,7 @@ public class Usuario {
 	@NotEmpty(message = "Indica un password")
 	@Size(min = 5)
 	private String password;
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 3c01281e70679effe1851423d1c045d69a817d79
 	@Column(name = "fecha_alta")
 	private LocalDate fechaAlta;
 }

@@ -11,7 +11,7 @@ import com.example.evento.model.EventoDTO;
 @Repository
 public interface EventoRepository extends MongoRepository<Evento, String> {
 
-	List<Evento> findAllByGenero(String genero);
+	public List<Evento> findAllByGenero(String genero);
 
 	public List<Evento> findByNombre(String nombre);
 
