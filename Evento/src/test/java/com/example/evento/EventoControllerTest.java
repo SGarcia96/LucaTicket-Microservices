@@ -47,15 +47,7 @@ public class EventoControllerTest {
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
-<<<<<<< HEAD
-<<<<<<< HEAD
-		evento.setFechaEvento(new Date("11-11-2060"));
-=======
-		evento.setFechaEvento(new Date(2000,04,12));
->>>>>>> d4b8ff99250a5dfb8c9932d7cfc6525a3f27a59d
-=======
 		evento.setFechaEvento(LocalDate.now());
->>>>>>> 3c01281e70679effe1851423d1c045d69a817d79
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
@@ -134,11 +126,23 @@ public class EventoControllerTest {
 	public void shouldGetEventoByGeneroWithStatus200() {
 		when()
 			.get("findAllByGenero/rock")
-		.then()
+			.then()
 			.statusCode(200)
 			.assertThat()
 			.body("size()", greaterThan(0))
 			.body("genero[0]", equalTo("rock"));
 	}
-		
+
+	// GET /eventos/findAllByNombre{nombre}
+	@Test
+	public void shouldGetEventoByNombreWithStatus200() {
+		when()
+			.get("/findAllByNombre/eventitoFecha2")
+		.then()
+			.statusCode(200)
+			.assertThat()
+			.body("size()", greaterThan(0))
+			.body("id[0]", equalTo("61f142e9be1b54605e3893d0"));
+	}
+
 }

@@ -41,4 +41,9 @@ public class EventoServiceImpl implements EventoService {
 	public List<EventoDTO> findAllByGenero(String genero) {
 		return EventoAdapter.of(eventoRepository.findAllByGenero(genero));
 	}
+	
+	@Override 
+	public List<EventoDTO> findAllByNombre(String nombre) {
+		return EventoAdapter.of(eventoRepository.findByNombre(nombre));
+	}
 }
