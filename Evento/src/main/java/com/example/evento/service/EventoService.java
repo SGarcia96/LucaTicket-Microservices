@@ -11,4 +11,6 @@ public interface EventoService {
 	public List<EventoDTO> findAll();
 	
 	public EventoDTO findById(String id);
+	
+	public List<EventoDTO> findAllByNombre(String nombre);
 }

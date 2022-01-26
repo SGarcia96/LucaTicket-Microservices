@@ -82,5 +82,20 @@ public class EventoController {
 		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
 	}
-
+	
+	@Operation(summary = "Buscar eventos por nombre", description = "Dado un nombre, devuelve uno o varios objetos Evento", tags= {"evento"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
+	@GetMapping("findAllByNombre/{nombre}")
+	public List<EventoDTO> findAllByNombre(
+			@Parameter(description = "Nombre del evento a localizar", required=true)
+			@PathVariable("nombre") String nombre) {
+		log.info("--- eventos por nombre " + nombre);
+		final List<EventoDTO> eventos = eventoService.findAllByNombre(nombre);
+		return eventos;
+	}
+	
 }
