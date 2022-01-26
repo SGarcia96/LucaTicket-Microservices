@@ -1,6 +1,6 @@
 package com.example.evento.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +11,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,9 +22,9 @@ import lombok.NoArgsConstructor;
 public class Evento {
 	@Id
 	private String id;
-
+	
 	@NotEmpty
-	@Size(min = 3, max = 30)
+	@Size(min=3, max=30)
 	private String nombre;
 
 	@NotEmpty(message = "La descripcionCorta no debe ser vacío")
@@ -36,20 +38,23 @@ public class Evento {
 
 	@NotNull
 	@FutureOrPresent
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date fechaEvento;
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
+	private LocalDate fechaEvento;
 
 	@NotEmpty
-	//@DateTimeFormat(pattern = "hh:mm")
+	@JsonFormat(pattern = "hh:mm")
 	private String horaEvento;
-
+	
 	@NotEmpty
 	private float[] rangoPrecios;
 
 	@NotEmpty(message = "La politicaAcceso no debe ser vacío")
 	private String politicaAcceso;
 
+	@NotEmpty(message = "El género no debe ser vacío")
+	private String genero;
+
 	@NotNull
 	private Recinto recinto;
-
+	
 }

@@ -1,6 +1,6 @@
 package com.example.evento.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,15 +13,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EventoDTO {
 	@Id
-	private String id;
+	private String id ;
 	private String nombre;
 	private String descripcionCorta;
 	private String descripcionLarga;
 	private String fotoUrl;
-	private Date fechaEvento;
+	private LocalDate fechaEvento;
 	private String horaEvento;
 	private float[] rangoPrecios;
 	private String politicaAcceso;
+	private String genero;
 	private Recinto recinto;
 
 }

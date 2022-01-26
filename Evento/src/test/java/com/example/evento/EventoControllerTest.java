@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class EventoControllerTest {
 	
@@ -21,9 +21,9 @@ public class EventoControllerTest {
 	
 	@BeforeAll
 	public static void setup() {
+		logger.info("------> INICIANDO TEST");
 		baseURI = "http://localhost:7777";
 		basePath = "/eventos";
-		port = 8080;
 	}
 	
 	// GET /eventos
@@ -38,23 +38,20 @@ public class EventoControllerTest {
 	}
 	
 	// POST /eventos
-	@SuppressWarnings("deprecation")
 	@Test
 	@Disabled
 	public void shouldAddEventoWithStatus201() {
-		logger.info("eeeeeeeeeeeeeeeeeeeeeeeeee");
 		Evento evento = new Evento();
 		
 		evento.setNombre("ntest");
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
-		evento.setFechaEvento(new Date(2000,04,12));
+		evento.setFechaEvento(LocalDate.now());
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
 		evento.setRecinto(new Recinto("a", "b", "c", 10));
-		logger.info(evento.toString());
 			
 		given()
 			.contentType("application/json")
@@ -64,18 +61,17 @@ public class EventoControllerTest {
 		.then()
 			.statusCode(201)
 			.body("nombre", equalTo("ntest"));
-				
 	}
 	
 	// POST /eventos
 	@Test
-	public void shouldReturnAnErrorMessageAndStatus400() {
+	public void shouldReturnAnErrorMessageAndStatus400WhenAnAttributteIsEmpty() {
 		Evento evento = new Evento();
 		evento.setNombre("");
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
-		evento.setFechaEvento(new Date(2000,04,12));
+		evento.setFechaEvento(LocalDate.now());
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
@@ -105,7 +101,9 @@ public class EventoControllerTest {
 			.body("nombre", equalTo("eventito 2.0"));
 	}
 	
-	@Test void shouldReturnAnErrorMessageAndStatus404() {
+	// GET /eventos/{id}
+	@Test 
+	void shouldReturnAnErrorMessageAndStatus404WhenIdNotExist() {
 		when()
 			.get("/1")
 		.then()
@@ -113,4 +111,38 @@ public class EventoControllerTest {
 			.body("error", equalTo("Not Found"))
 			.body("message", equalTo("Epic Fail: No existe el evento"));
 	}
+	
+	// DELETE /eventos/{id}
+	@Test
+	@Disabled
+	public void shouldReturnStatus200WhenDeleteSuccessful() {
+		when()
+			.delete("/61f012bd80dacc7180e36747")
+		.then()
+			.statusCode(200);
+	}
+	
+	@Test
+	public void shouldGetEventoByGeneroWithStatus200() {
+		when()
+			.get("findAllByGenero/rock")
+			.then()
+			.statusCode(200)
+			.assertThat()
+			.body("size()", greaterThan(0))
+			.body("genero[0]", equalTo("rock"));
+	}
+
+	// GET /eventos/findAllByNombre{nombre}
+	@Test
+	public void shouldGetEventoByNombreWithStatus200() {
+		when()
+			.get("/findAllByNombre/eventitoFecha2")
+		.then()
+			.statusCode(200)
+			.assertThat()
+			.body("size()", greaterThan(0))
+			.body("id[0]", equalTo("61f142e9be1b54605e3893d0"));
+	}
+
 }
