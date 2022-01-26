@@ -1,8 +1,5 @@
 package com.example.usuario.model;
 
-
-
-
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -32,35 +29,31 @@ import lombok.NoArgsConstructor;
 //@Table(name = "usuarios")
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name="Usuario", description = "Clase Usuario")
+@Schema(name = "Usuario", description = "Clase Usuario")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(name= "id", 
-			description = "Identificador único para el usuario", 
-			example = "1", 
-			required = true)
+	@Schema(name = "id", description = "Identificador único para el usuario", example = "1", required = true)
 	private long id;
-	
+
 	@NotEmpty(message = "El nombre no debde ser vacío")
 	@Size(min = 3, max = 30)
 	private String nombre;
-	
+
 	@NotEmpty(message = "Necesitamos que indigues un apellido")
 	@Size(min = 3, max = 30)
 	private String apellido;
-	
+
 	@NotEmpty(message = "El mail no debe ser vacio")
 	@Email
 	@Column(unique = true)
 	private String mail;
-	
+
 	@NotEmpty(message = "Indica un password")
 	@Size(min = 5)
 	private String password;
-	
-	
+
 	@Column(name = "fecha_alta")
 	private LocalDate fechaAlta;
 }

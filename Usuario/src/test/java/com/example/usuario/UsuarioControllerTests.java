@@ -39,13 +39,13 @@ public class UsuarioControllerTests {
 	
 	@Test
 	public void shouldAddUsuarioWithStatus201() {
-		logger.info("eeeeeeeeeeeeeeeeeeeeeeeeee");
+		logger.info("----TEST USUARIO CREADO-----");
 		Usuario usuario = new Usuario();
 		
-		usuario.setNombre("Dimitri");
-		usuario.setApellido("Kruchenko");
-		usuario.setMail("d.kruchenko@gmail.com");
-		usuario.setPassword("Ak47top");
+		usuario.setNombre("Juan");
+		usuario.setApellido("Martinez");
+		usuario.setMail("j.martinez@gmail.com");
+		usuario.setPassword("12345");
 		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
 		logger.info(usuario.toString());
 		
@@ -56,16 +56,16 @@ public class UsuarioControllerTests {
 			.post()
 		.then()
 			.statusCode(201)
-			.body("apellido", equalTo("Kruchenko"));
+			.body("apellido", equalTo("Martinez"));
 	}
-	
+
 	@Test
 	public void shouldReturnAnErrorMessageAndStatus400() {
 		logger.info("----TEST CAMPO VACIO-----");
 		Usuario usuario = new Usuario();
-		
-		usuario.setNombre("Vladimir");
-		usuario.setMail("yesiamputin@gmail.com");
+		usuario.setNombre("Juan");
+		//No se inserta apellido
+		usuario.setMail("j.martinez@gmail.com");
 		usuario.setPassword("12345");
 		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
 		logger.info(usuario.toString());
