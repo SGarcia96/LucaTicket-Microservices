@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class EventoControllerTest {
 	
@@ -38,7 +38,6 @@ public class EventoControllerTest {
 	}
 	
 	// POST /eventos
-	@SuppressWarnings("deprecation")
 	@Test
 	@Disabled
 	public void shouldAddEventoWithStatus201() {
@@ -48,7 +47,7 @@ public class EventoControllerTest {
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
-		evento.setFechaEvento(new Date(2000,04,12));
+		evento.setFechaEvento(LocalDate.now());
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
@@ -65,7 +64,6 @@ public class EventoControllerTest {
 	}
 	
 	// POST /eventos
-	@SuppressWarnings("deprecation")
 	@Test
 	public void shouldReturnAnErrorMessageAndStatus400WhenAnAttributteIsEmpty() {
 		Evento evento = new Evento();
@@ -73,7 +71,7 @@ public class EventoControllerTest {
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
-		evento.setFechaEvento(new Date(2000,04,12));
+		evento.setFechaEvento(LocalDate.now());
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
 		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});

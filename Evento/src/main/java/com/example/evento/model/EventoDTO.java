@@ -1,6 +1,6 @@
 package com.example.evento.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,7 +18,7 @@ public class EventoDTO {
 	private String descripcionCorta;
 	private String descripcionLarga;
 	private String fotoUrl;
-	private Date fechaEvento;
+	private LocalDate fechaEvento;
 	private String horaEvento;
 	private float[] rangoPrecios;
 	private String politicaAcceso;
