@@ -11,10 +11,8 @@ public interface EventoService {
 	public List<EventoDTO> findAll();
 	
 	public EventoDTO findById(String id);
-	
 
-	public EventoDTO update(Evento evento);
-
+	public EventoDTO update(String id, Evento evento);
 
 	public void deleteById(String id);
 	

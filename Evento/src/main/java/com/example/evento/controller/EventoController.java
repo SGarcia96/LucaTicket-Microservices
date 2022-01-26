@@ -81,18 +81,9 @@ public class EventoController {
 		}
 		
 	@PutMapping("/{id}")
-	public ResponseEntity<Evento> updateEvento(@PathVariable("id") int id, @RequestBody Evento evento){
-		Optional<Evento> eventoData = eventoService.findById(id);
-		
-		if (eventoData.isPresent()) {
-			Evento newEvento = eventoData.get();
-			newEvento.setNombre(evento.getNombre());
-			newEvento.setFechaEvento(evento.getFechaEvento());
-			return new ResponseEntity<>(eventoService.save(newEvento), HttpStatus.OK);
-		}	else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			
-		}
+	public ResponseEntity<EventoDTO> updateEvento(@PathVariable("id") String id, @Valid @RequestBody Evento evento){
+		EventoDTO newEvento = eventoService.update(id, evento);
+		return new ResponseEntity<>(newEvento, HttpStatus.OK);
 	}
 
 	@Operation(summary = "Eliminar un evento por ID", description = "Dado un ID, elimina el evento", tags = {
