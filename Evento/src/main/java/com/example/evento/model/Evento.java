@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Evento {
 	@Id
-	private String id;
-
+	private String id ;
+	
 	@NotEmpty
 	@Size(min = 3, max = 30)
 	private String nombre;

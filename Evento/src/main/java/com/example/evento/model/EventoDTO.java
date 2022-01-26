@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EventoDTO {
 	@Id
-	private String id;
+	private String id ;
 	private String nombre;
 	private String descripcionCorta;
 	private String descripcionLarga;
