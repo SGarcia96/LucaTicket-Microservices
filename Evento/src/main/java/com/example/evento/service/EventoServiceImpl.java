@@ -31,4 +31,13 @@ public class EventoServiceImpl implements EventoService {
 	public EventoDTO findById(String id) {
 		return EventoAdapter.of(eventoRepository.findById(id).orElseThrow(EventoNotFoundException::new));
 	}
+
+	@Override
+	public EventoDTO update(Evento evento) {
+		
+	Evento newEvento = eventoRepository.findById(evento.getId()).orElseThrow(EventoNotFoundException::new);
+	
+	return 
+
+	}
 }
