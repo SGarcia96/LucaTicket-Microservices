@@ -1,6 +1,6 @@
 package com.example.evento.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +11,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +21,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Evento {
 	@Id
+<<<<<<< HEAD
 	private String id;
+=======
+	private String id ;
+>>>>>>> 3c01281e70679effe1851423d1c045d69a817d79
 	
 	@NotEmpty
 	@Size(min=3, max=30)
@@ -36,11 +42,15 @@ public class Evento {
 
 	@NotNull
 	@FutureOrPresent
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date fechaEvento;
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
+	private LocalDate fechaEvento;
 
 	@NotEmpty
+<<<<<<< HEAD
 	@DateTimeFormat(pattern="hh:mm") 
+=======
+	@JsonFormat(pattern = "hh:mm")
+>>>>>>> 3c01281e70679effe1851423d1c045d69a817d79
 	private String horaEvento;
 	
 	@NotEmpty
@@ -49,7 +59,14 @@ public class Evento {
 	@NotEmpty(message = "La politicaAcceso no debe ser vacío")
 	private String politicaAcceso;
 	
+<<<<<<< HEAD
 	@NotEmpty
+=======
+	@NotEmpty(message = "El género no debe ser vacío")
+	private String genero;
+
+	@NotNull
+>>>>>>> 3c01281e70679effe1851423d1c045d69a817d79
 	private Recinto recinto;
 	
 }
