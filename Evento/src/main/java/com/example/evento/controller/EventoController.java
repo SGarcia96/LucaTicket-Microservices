@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,6 +78,21 @@ public class EventoController {
 	public ResponseEntity<EventoDTO> addEvento(@Valid @RequestBody Evento evento) {
 		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
+		}
+		
+	@PutMapping("/{id}")
+	public ResponseEntity<Evento> updateEvento(@PathVariable("id") int id, @RequestBody Evento evento){
+		Optional<Evento> eventoData = eventoService.findById(id);
+		
+		if (eventoData.isPresent()) {
+			Evento newEvento = eventoData.get();
+			newEvento.setNombre(evento.getNombre());
+			newEvento.setFechaEvento(evento.getFechaEvento());
+			return new ResponseEntity<>(eventoService.save(newEvento), HttpStatus.OK);
+		}	else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			
+		}
 	}
 
 	@Operation(summary = "Eliminar un evento por ID", description = "Dado un ID, elimina el evento", tags = {
@@ -123,3 +139,5 @@ public class EventoController {
 	}
 
 }
+	
+

@@ -33,6 +33,14 @@ public class EventoServiceImpl implements EventoService {
 	}
 
 	@Override
+<<<<<<< HEAD
+	public EventoDTO update(Evento evento) {
+		
+	Evento newEvento = eventoRepository.findById(evento.getId()).orElseThrow(EventoNotFoundException::new);
+	
+	return 
+
+=======
 	public void deleteById(String id) {
 		eventoRepository.deleteById(id);
 	}
@@ -45,5 +53,6 @@ public class EventoServiceImpl implements EventoService {
 	@Override 
 	public List<EventoDTO> findAllByNombre(String nombre) {
 		return EventoAdapter.of(eventoRepository.findByNombre(nombre));
+>>>>>>> 06cc10aa9e05f9fe53b5a168d34f6254b0dc48ab
 	}
 }
