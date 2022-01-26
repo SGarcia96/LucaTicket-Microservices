@@ -11,12 +11,14 @@ public interface EventoService {
 	public List<EventoDTO> findAll();
 	
 	public EventoDTO findById(String id);
-	
+
+	public EventoDTO update(String id, Evento evento);
 
 	public void deleteById(String id);
 	
-	List<EventoDTO> findAllByGenero(String genero);
+	public List<EventoDTO> findAllByGenero(String genero);
 
 	public List<EventoDTO> findAllByNombre(String nombre);
+
 
 }

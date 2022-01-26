@@ -26,7 +26,6 @@ import lombok.NoArgsConstructor;
                    @UniqueConstraint(columnNames = "mail")
                   }
 )
-//@Table(name = "usuarios")
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "Usuario", description = "Clase Usuario")

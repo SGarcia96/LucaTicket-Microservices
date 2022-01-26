@@ -122,6 +122,7 @@ public class EventoControllerTest {
 			.statusCode(200);
 	}
 	
+	// GET /eventos/findAllByGenero/{genero}
 	@Test
 	public void shouldGetEventoByGeneroWithStatus200() {
 		when()
