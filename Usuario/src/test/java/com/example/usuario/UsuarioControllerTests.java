@@ -3,10 +3,8 @@ package com.example.usuario;
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.port;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -27,15 +25,13 @@ public class UsuarioControllerTests {
 		baseURI = "http://localhost:8888";
 		basePath = "/usuarios";
 	}
+	
 	@Test
 	public void shouldGetAllUsuariosWithStatus200() {
 		when()
 			.get()
 		.then()
 			.statusCode(200);
-			//.assertThat()
-			//.body("size()", greaterThan(0));
-			
 	}
 	
 	@Test
@@ -58,7 +54,8 @@ public class UsuarioControllerTests {
 		.then()
 			.statusCode(201)
 			.body("apellido", equalTo("Martinez"));
-}
+	}
+	
 	@Test
 	public void shouldReturnAnErrorMessageAndStatus400() {
 		logger.info("----TEST CAMPO VACIO-----");
@@ -79,9 +76,6 @@ public class UsuarioControllerTests {
 			.statusCode(400)
 			.body("error", equalTo("BAD_REQUEST"))
 			.body("message[0]",equalTo("apellido: Necesitamos que indigues un apellido"));
-			
-			
-		
-		}
 	}
+}
 
