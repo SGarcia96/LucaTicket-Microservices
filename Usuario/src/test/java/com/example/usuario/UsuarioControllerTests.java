@@ -13,10 +13,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.usuario.model.Usuario;
 
-
+@ActiveProfiles("dev")
 public class UsuarioControllerTests {
 	private static final Logger logger = LoggerFactory.getLogger(UsuarioControllerTests.class);
 	
@@ -55,7 +56,7 @@ public class UsuarioControllerTests {
 			.statusCode(201)
 			.body("apellido", equalTo("Martinez"));
 	}
-	
+
 	@Test
 	public void shouldReturnAnErrorMessageAndStatus400() {
 		logger.info("----TEST CAMPO VACIO-----");

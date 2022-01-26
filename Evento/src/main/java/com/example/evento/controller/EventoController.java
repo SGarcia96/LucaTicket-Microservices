@@ -1,8 +1,10 @@
 package com.example.evento.controller;
 
+import java.net.URI;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.model.Evento;
 import com.example.evento.model.EventoDTO;
 import com.example.evento.service.EventoService;
@@ -38,9 +41,11 @@ public class EventoController {
 
 	@Autowired
 	private EventoService eventoService;
+	
+	@Autowired
+	private EventoAdapter eventoAdapter;
 
-	@Operation(summary = "Buscar todos los eventos", description = "devuelve todos los eventos registrados", tags = {
-			"evento" })
+	@Operation(summary = "Buscar todos los eventos", description = "devuelve todos los eventos registrados", tags= {"evento"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
@@ -89,6 +94,36 @@ public class EventoController {
 			@Parameter(description = "ID del evento a localizar", required = true) @PathVariable("id") String id) {
 		log.info("--- deleteEvento con id " + id);
 		eventoService.deleteById(id);
+	}
+
+	@Operation(summary = "Buscar eventos por género", description = "Dado un género, devuelve todos los eventos de dicho género", tags = {
+			"evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
+	@GetMapping("findAllByGenero/{genero}")
+	public List<EventoDTO> getAllEventosByGenero(
+			@Parameter(description = "Género del evento a localizar", required = true) @PathVariable("genero") String genero) {
+		log.info("--- eventos por genero " + genero);
+		final List<EventoDTO> eventos = eventoService.findAllByGenero(genero);
+		return eventos;
+	}
+
+	@Operation(summary = "Buscar eventos por nombre", description = "Dado un nombre, devuelve uno o varios objetos Evento", tags= {"evento"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
+	@GetMapping("findAllByNombre/{nombre}")
+	public List<EventoDTO> findAllByNombre(
+			@Parameter(description = "Nombre del evento a localizar", required=true)
+			@PathVariable("nombre") String nombre) {
+		log.info("--- eventos por nombre " + nombre);
+		final List<EventoDTO> eventos = eventoService.findAllByNombre(nombre);
+		return eventos;
 	}
 
 }

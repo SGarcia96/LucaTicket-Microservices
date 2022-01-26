@@ -22,6 +22,7 @@ public class EventoAdapter {
 		eventoDTO.setHoraEvento(evento.getHoraEvento());
 		eventoDTO.setRangoPrecios(evento.getRangoPrecios());
 		eventoDTO.setPoliticaAcceso(evento.getPoliticaAcceso());
+		eventoDTO.setGenero(evento.getGenero());
 		eventoDTO.setRecinto(evento.getRecinto());
 		return eventoDTO;
 	}

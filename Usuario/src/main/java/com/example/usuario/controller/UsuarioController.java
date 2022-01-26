@@ -24,9 +24,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/usuarios")
+@Tag(name = "Usuario", description = "the Usuario API")
 public class UsuarioController {
 	
 	private static final Logger log = LoggerFactory.getLogger(UsuarioController.class);
@@ -68,6 +70,10 @@ public class UsuarioController {
 			@ApiResponse(responseCode = "201", description = "Usuario añadido", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) })
 			})
+<<<<<<< HEAD
+	
+=======
+>>>>>>> d4b8ff99250a5dfb8c9932d7cfc6525a3f27a59d
 	@PostMapping
 	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario){
 

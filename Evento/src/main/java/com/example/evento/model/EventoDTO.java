@@ -22,6 +22,7 @@ public class EventoDTO {
 	private String horaEvento;
 	private float[] rangoPrecios;
 	private String politicaAcceso;
+	private String genero;
 	private Recinto recinto;
 
 }

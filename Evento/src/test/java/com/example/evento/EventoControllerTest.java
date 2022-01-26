@@ -121,5 +121,28 @@ public class EventoControllerTest {
 		.then()
 			.statusCode(200);
 	}
-		
+	
+	@Test
+	public void shouldGetEventoByGeneroWithStatus200() {
+		when()
+			.get("findAllByGenero/rock")
+			.then()
+			.statusCode(200)
+			.assertThat()
+			.body("size()", greaterThan(0))
+			.body("genero[0]", equalTo("rock"));
+	}
+
+	// GET /eventos/findAllByNombre{nombre}
+	@Test
+	public void shouldGetEventoByNombreWithStatus200() {
+		when()
+			.get("/findAllByNombre/eventitoFecha2")
+		.then()
+			.statusCode(200)
+			.assertThat()
+			.body("size()", greaterThan(0))
+			.body("id[0]", equalTo("61f142e9be1b54605e3893d0"));
+	}
+
 }

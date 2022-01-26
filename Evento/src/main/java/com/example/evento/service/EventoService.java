@@ -12,5 +12,11 @@ public interface EventoService {
 	
 	public EventoDTO findById(String id);
 	
+
 	public void deleteById(String id);
+	
+	List<EventoDTO> findAllByGenero(String genero);
+
+	public List<EventoDTO> findAllByNombre(String nombre);
+
 }

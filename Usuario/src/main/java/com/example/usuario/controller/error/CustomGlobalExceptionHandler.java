@@ -1,6 +1,7 @@
 package com.example.usuario.controller.error;
 
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
+import org.bouncycastle.asn1.ocsp.Request;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +56,13 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	public void constraintViolationException(HttpServletResponse response) throws IOException {
 		logger.info("------ ConstraintViolationException() ");
 		response.sendError(HttpStatus.BAD_REQUEST.value());
+	}
+	
+	// @Validate For Validating Path Variables and Request Parameters
+	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+	public void sqlConstraintViolationException(HttpServletResponse response) throws IOException {
+		logger.info("------ SQLConstraintViolationException() ");
+		response.sendError(HttpStatus.BAD_REQUEST.value(), "El correo ya existe");
 	}
 
 	// error handle for @Valid
