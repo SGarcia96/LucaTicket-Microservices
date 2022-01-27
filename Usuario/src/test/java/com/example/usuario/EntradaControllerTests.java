@@ -15,20 +15,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.example.usuario.model.Entrada;
 import com.example.usuario.model.Usuario;
 
 @ActiveProfiles("dev")
-public class UsuarioControllerTests {
-	private static final Logger logger = LoggerFactory.getLogger(UsuarioControllerTests.class);
+public class EntradaControllerTests {
+	private static final Logger logger = LoggerFactory.getLogger(EntradaControllerTests.class);
 	
 	@BeforeAll
 	public static void setup() {
 		baseURI = "http://localhost:8888";
-		basePath = "/usuarios";
+		basePath = "/entrada";
 	}
 	
 	@Test
-	public void shouldGetAllUsuariosWithStatus200() {
+	public void shouldGetAllEntradasWithStatus200() {
 		when()
 			.get()
 		.then()
@@ -36,47 +37,43 @@ public class UsuarioControllerTests {
 	}
 	
 	@Test
-	public void shouldAddUsuarioWithStatus201() {
-		logger.info("----TEST USUARIO CREADO-----");
-		Usuario usuario = new Usuario();
-		
-		usuario.setNombre("Juan");
-		usuario.setApellido("Martinez");
-		usuario.setMail("j.martino@gmail.com");
-		usuario.setPassword("12345");
-		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
-		logger.info(usuario.toString());
+	public void shouldAddEntradaWithStatus201() {
+		logger.info("----TEST ENTRADA CREADA-----");
+		Entrada entrada = new Entrada();
+
+		entrada.setVip(true);
+		entrada.setUsuario(16);
+		entrada.setEvento("eventillo");
+		logger.info(entrada.toString());
 		
 		given()
 			.contentType("application/json")
-			.body(usuario)
+			.body(entrada)
 		.when()
 			.post()
 		.then()
 			.statusCode(201)
-			.body("apellido", equalTo("Martinez"));
+			.body("evento", equalTo("eventillo"));
 	}
 
 	@Test
 	public void shouldReturnAnErrorMessageAndStatus400() {
 		logger.info("----TEST CAMPO VACIO-----");
-		Usuario usuario = new Usuario();
-		usuario.setNombre("Juan");
-		//No se inserta apellido
-		usuario.setMail("j.martino@gmail.com");
-		usuario.setPassword("12345");
-		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
-		logger.info(usuario.toString());
+		Entrada entrada = new Entrada();
+		entrada.setUsuario(1111111111);
+		entrada.setVip(true);
+		//No se inserta evento
+		logger.info(entrada.toString());
 		
 		given()
 			.contentType("application/json")
-			.body(usuario)
+			.body(entrada)
 		.when()
 			.post()
 		.then()
 			.statusCode(400)
 			.body("error", equalTo("BAD_REQUEST"))
-			.body("message[0]",equalTo("apellido: Necesitamos que indiques un apellido"));
+			.body("message[0]",equalTo("evento: Necesitamos que se indique el evento"));
 	}
 }
 
