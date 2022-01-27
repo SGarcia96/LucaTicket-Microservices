@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Entrada;
 import com.example.usuario.model.Usuario;
+import com.example.usuario.service.EntradaService;
 import com.example.usuario.service.UsuarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,6 +60,6 @@ public class EntradaController {
 	@PostMapping
 	public ResponseEntity<?> addEntrada(@Valid @RequestBody Entrada entrada){
 
-		return new ResponseEntity<>(entradaService.save(entrada), HttpStatus.CREATED);
+		return new ResponseEntity<>(entradaService.addEntrada(entrada), HttpStatus.CREATED);
 	}
 }
