@@ -76,16 +76,21 @@ public class UsuarioController {
 		log.info("--- add usuario: " + usuario);
 		return new ResponseEntity<>(usuariosService.save(usuario), HttpStatus.CREATED);
 	}
-	
+
+	@Operation(summary = "Login", description = "Permite a un usuario loguearse", tags = { "usuario" })
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario y contraseña correctos", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
+	@ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content),
+	@ApiResponse(responseCode = "400", description = "Contraseña incorrecta ", content = @Content)})
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestParam("usuario") String usuario, @RequestParam("password") String pwd) {
-		
+
 		UsuarioDTO usuarioRegistrado = usuariosService.findByMail(usuario);
 
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 		boolean isPasswordMatches = bcrypt.matches(pwd, usuarioRegistrado.getPassword());
 
-		if(!isPasswordMatches ) {
+		if (!isPasswordMatches) {
 			throw new IncorrectPasswordException();
 		}
 		String token = usuariosService.getJWTToken(usuarioRegistrado);
