@@ -76,7 +76,7 @@ public class UsuarioControllerTests {
 		.then()
 			.statusCode(400)
 			.body("error", equalTo("BAD_REQUEST"))
-			.body("message[0]",equalTo("apellido: Necesitamos que indigues un apellido"));
+			.body("message[0]",equalTo("apellido: Necesitamos que indiques un apellido"));
 	}
 	
 	@Test
