@@ -28,7 +28,7 @@ public class Entrada {
 
 	private boolean vip;
 
-	private long usuario;
+	private long idUsuario;
 
 	@NotEmpty(message = "Necesitamos que se indique el evento")
 	private String evento;
