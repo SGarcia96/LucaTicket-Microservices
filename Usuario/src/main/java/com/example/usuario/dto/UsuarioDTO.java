@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Schema(name="UsuarioDTO", description = "Clase UsuarioDTO")
-public class UsuarioDTO implements Serializable{
+@Schema(name = "UsuarioDTO", description = "Clase UsuarioDTO")
+public class UsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private long id;
 	private String nombre;
 	private String apellido;

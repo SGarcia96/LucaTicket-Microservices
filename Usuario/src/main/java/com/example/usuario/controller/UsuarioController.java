@@ -30,12 +30,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/usuarios")
 @Tag(name = "Usuario", description = "the Usuario API")
 public class UsuarioController {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(UsuarioController.class);
-	
+
 	@Autowired
 	private UsuarioService usuariosService;
-	
+
 //	@Operation(summary = "Buscar usuario por ID", description = "Dado un ID, devuelve un objeto Usuario", tags= {"usuario"})
 //	@ApiResponses(value = {
 //			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
@@ -50,29 +50,28 @@ public class UsuarioController {
 //		final UsuarioDTO usuario = usuariosService.findById(id).orElseThrow();
 //		return usuario;
 //	}
-	
-	@Operation(summary = "Buscar todos los usuarios", description = "", tags= {"usuario"})
+
+	@Operation(summary = "Buscar todos los usuarios", description = "", tags = { "usuario" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuarios localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
 			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuarios no encontrados (NO implementados)", content = @Content) })
 	@GetMapping
-	public List<UsuarioDTO> getAllUsuarios(){
+	public List<UsuarioDTO> getAllUsuarios() {
 		log.info("--- todos los eventos");
 		final List<UsuarioDTO> all = usuariosService.findAll();
 		return all;
 
 	}
-	
-	@Operation(summary = "Añade un nuevo Usuario", description = "Añade un usuario a la base de datos", tags= {"usuario"})
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "201", description = "Usuario añadido", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) })
-			})
-	@PostMapping
-	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario){
 
+	@Operation(summary = "Añade un nuevo Usuario", description = "Añade un usuario a la base de datos", tags = {
+			"usuario" })
+	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Usuario añadido", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }) })
+	@PostMapping
+	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario) {
+		log.info("--- add usuario: " + usuario);
 		return new ResponseEntity<>(usuariosService.save(usuario), HttpStatus.CREATED);
 	}
 
