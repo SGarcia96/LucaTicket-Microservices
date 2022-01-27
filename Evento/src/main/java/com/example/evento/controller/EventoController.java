@@ -78,8 +78,14 @@ public class EventoController {
 	public ResponseEntity<EventoDTO> addEvento(@Valid @RequestBody Evento evento) {
 		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
-		}
-		
+	}
+	
+	@Operation(summary = "Editar un Evento", description = "Dado el ID de un evento y sus campos modificados, actualiza el evento", tags = { "evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Evento modificado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (ID no existe)", content = @Content)})
 	@PutMapping("/{id}")
 	public ResponseEntity<EventoDTO> updateEvento(@PathVariable("id") String id, @Valid @RequestBody Evento evento){
 		EventoDTO newEvento = eventoService.update(id, evento);

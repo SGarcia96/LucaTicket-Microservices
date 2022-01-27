@@ -43,7 +43,7 @@ public class EventoServiceImpl implements EventoService {
 		newEvento.setFotoUrl(evento.getFotoUrl());
 		newEvento.setHoraEvento(evento.getHoraEvento());
 		newEvento.setPoliticaAcceso(evento.getPoliticaAcceso());
-		newEvento.setId(evento.getId());
+		newEvento.setGenero(evento.getGenero());
 		newEvento.setRangoPrecios(evento.getRangoPrecios());
 		newEvento.setRecinto(evento.getRecinto());
 
