@@ -78,7 +78,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@RequestParam("usuario") String usuario, @RequestParam("password") String pwd) {
+	public ResponseEntity<?> login(@RequestParam("usuario") String usuario, @RequestParam("password") String pwd) {
 		
 		UsuarioDTO usuarioRegistrado = usuariosService.findByMail(usuario);
 
@@ -88,8 +88,8 @@ public class UsuarioController {
 		if(!isPasswordMatches ) {
 			throw new IncorrectPasswordException();
 		}
-		return usuariosService.getJWTToken(usuarioRegistrado);
-		
+		String token = usuariosService.getJWTToken(usuarioRegistrado);
+		return new ResponseEntity<>(token, HttpStatus.OK);
 	}
 
 }

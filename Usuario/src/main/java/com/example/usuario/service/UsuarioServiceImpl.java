@@ -61,8 +61,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		String token = Jwts
 				.builder()
 				.setId("softtekJWT")
-				.setSubject(usuario.getNombre())
-				.setSubject(usuario.getApellido())
 				.setSubject(usuario.getMail())
 				.claim("authorities",
 						grantedAuthorities.stream()
