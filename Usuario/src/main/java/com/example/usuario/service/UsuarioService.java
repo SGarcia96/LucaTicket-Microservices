@@ -10,4 +10,8 @@ public interface UsuarioService {
 	public UsuarioDTO save(Usuario usuario);
 	
 	public List<UsuarioDTO> findAll();
+	
+	public UsuarioDTO findByMail(String mail);
+	
+	public String getJWTToken(UsuarioDTO usuario);
 }
