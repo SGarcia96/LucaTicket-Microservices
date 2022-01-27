@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.evento.model.Evento;
 import com.example.evento.model.Recinto;
@@ -15,6 +16,7 @@ import static org.hamcrest.Matchers.greaterThan;
 
 import java.time.LocalDate;
 
+@ActiveProfiles("dev")
 public class EventoControllerTest {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EventoControllerTest.class);
@@ -39,7 +41,6 @@ public class EventoControllerTest {
 	
 	// POST /eventos
 	@Test
-	@Disabled
 	public void shouldAddEventoWithStatus201() {
 		Evento evento = new Evento();
 		
@@ -47,6 +48,7 @@ public class EventoControllerTest {
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
+		evento.setGenero("hombre");
 		evento.setFechaEvento(LocalDate.now());
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
