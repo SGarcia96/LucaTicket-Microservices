@@ -1,13 +1,13 @@
 package com.example.evento.controller;
 
-import java.net.URI;
-import javax.validation.Valid;
-import org.springframework.http.HttpStatus;
 import java.util.List;
-import java.util.Optional;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.model.Evento;
 import com.example.evento.model.EventoDTO;
 import com.example.evento.service.EventoService;
@@ -28,9 +27,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @Validated
@@ -42,9 +41,6 @@ public class EventoController {
 
 	@Autowired
 	private EventoService eventoService;
-	
-	@Autowired
-	private EventoAdapter eventoAdapter;
 
 	@Operation(summary = "Buscar todos los eventos", description = "devuelve todos los eventos registrados", tags= {"evento"})
 	@ApiResponses(value = {
@@ -82,21 +78,18 @@ public class EventoController {
 	public ResponseEntity<EventoDTO> addEvento(@Valid @RequestBody Evento evento) {
 		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
-		}
-		
+	}
+	
+	@Operation(summary = "Editar un Evento", description = "Dado el ID de un evento y sus campos modificados, actualiza el evento", tags = { "evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Evento modificado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (ID no existe)", content = @Content)})
 	@PutMapping("/{id}")
-	public ResponseEntity<Evento> updateEvento(@PathVariable("id") int id, @RequestBody Evento evento){
-		Optional<Evento> eventoData = eventoService.findById(id);
-		
-		if (eventoData.isPresent()) {
-			Evento newEvento = eventoData.get();
-			newEvento.setNombre(evento.getNombre());
-			newEvento.setFechaEvento(evento.getFechaEvento());
-			return new ResponseEntity<>(eventoService.save(newEvento), HttpStatus.OK);
-		}	else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			
-		}
+	public ResponseEntity<EventoDTO> updateEvento(@PathVariable("id") String id, @Valid @RequestBody Evento evento){
+		EventoDTO newEvento = eventoService.update(id, evento);
+		return new ResponseEntity<>(newEvento, HttpStatus.OK);
 	}
 
 	@Operation(summary = "Eliminar un evento por ID", description = "Dado un ID, elimina el evento", tags = {

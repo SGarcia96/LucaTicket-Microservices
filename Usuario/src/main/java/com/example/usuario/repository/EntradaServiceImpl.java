@@ -11,7 +11,7 @@ public class EntradaServiceImpl implements EntradaService{
 	@Override
 	public Entrada addEntrada(long idUsuario, String idEvento, boolean vip) {
 		
-		return null;
+		return ;
 	}
 
 }
