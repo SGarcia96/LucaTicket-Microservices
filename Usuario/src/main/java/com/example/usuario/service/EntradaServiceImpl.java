@@ -11,20 +11,18 @@ import com.example.usuario.model.Entrada;
 import com.example.usuario.repository.EntradaRepository;
 
 @Repository
-public class EntradaServiceImpl implements EntradaService{
-	
+public class EntradaServiceImpl implements EntradaService {
+
 	@Autowired
 	private EntradaRepository entradaRepository;
-	
 
 	@Override
 	public Entrada addEntrada(Entrada entrada) {
-		
 		return entradaRepository.save(entrada);
 	}
-	
+
 	@Override
-	public List<Entrada> findAll(){
+	public List<Entrada> findAll() {
 		return entradaRepository.findAll();
 	}
 
