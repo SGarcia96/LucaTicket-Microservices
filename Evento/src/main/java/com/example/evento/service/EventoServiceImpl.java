@@ -32,8 +32,8 @@ public class EventoServiceImpl implements EventoService {
 		return EventoAdapter.of(eventoRepository.findById(id).orElseThrow(EventoNotFoundException::new));
 	}
 
-	@Override
-
+	
+	
 	public EventoDTO update(Evento evento) {
 		
 		Evento newEvento = eventoRepository.findById(evento.getId()).orElseThrow(EventoNotFoundException::new);
@@ -51,7 +51,7 @@ public class EventoServiceImpl implements EventoService {
 		return this.save(newEvento);
 	}
 
-
+	@Override
 	public EventoDTO update(String id, Evento evento) {
 
 		Evento newEvento = eventoRepository.findById(id).orElseThrow(EventoNotFoundException::new);
@@ -84,9 +84,6 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public List<EventoDTO> findAllByNombre(String nombre) {
-
-		// TODO Auto-generated method stub
-		return null;
 
 		return EventoAdapter.of(eventoRepository.findByNombre(nombre));
 
