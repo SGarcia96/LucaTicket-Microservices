@@ -17,5 +17,4 @@ class UsuarioNotFoundException extends RuntimeException{
 		super("Epic Fail: No existe el usuario"+id);
 	}
 	
-
 }

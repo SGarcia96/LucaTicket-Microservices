@@ -78,5 +78,16 @@ public class UsuarioControllerTests {
 			.body("error", equalTo("BAD_REQUEST"))
 			.body("message[0]",equalTo("apellido: Necesitamos que indiques un apellido"));
 	}
+	
+	@Test
+	public void shouldLogUsuarioWithStatus200() {
+		logger.info("----TEST LOGIN------");
+		given()
+			.contentType("application/json")
+		.when()
+			.post("/login?usuario=andrea@gmail.com&password=andrea123")
+		.then()
+			.statusCode(200);
+	}
 }
 
