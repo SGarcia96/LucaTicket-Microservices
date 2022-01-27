@@ -22,22 +22,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
-/*
- * AUTORIZACION
- * 
- * Intercepta las invocaciones a recursos protegidos para recuperar el token 
- * y determinar si el cliente tiene permisos o no
- * 
- * Este filtro intercepta todas las invocaciones al servidor (extiende de OncePerRequestFilter) y:
 
- *   Comprueba la existencia del token (existeJWTToken(...)).
- *      Si existe, lo desencripta y valida (validateToken(...)).
- *      Si está todo OK, añade la configuración necesaria al contexto de Spring 
- *          para autorizar la petición (setUpSpringAuthentication(...)).
- *       Para este último punto, se hace uso del objeto GrantedAuthority que se incluyó 
- *          en el token durante el proceso de autenticación.
- * 
- */
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private final String HEADER = "Authorization";
