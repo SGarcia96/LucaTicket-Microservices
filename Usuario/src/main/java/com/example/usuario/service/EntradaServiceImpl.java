@@ -1,4 +1,4 @@
-package com.example.usuario.repository;
+package com.example.usuario.service;
 
 import java.util.List;
 
@@ -8,23 +8,21 @@ import org.springframework.stereotype.Repository;
 import com.example.usuario.adapter.UsuarioAdapter;
 import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Entrada;
-import com.example.usuario.service.EntradaService;
+import com.example.usuario.repository.EntradaRepository;
 
 @Repository
-public class EntradaServiceImpl implements EntradaService{
-	
+public class EntradaServiceImpl implements EntradaService {
+
 	@Autowired
 	private EntradaRepository entradaRepository;
-	
 
 	@Override
 	public Entrada addEntrada(Entrada entrada) {
-		
 		return entradaRepository.save(entrada);
 	}
-	
+
 	@Override
-	public List<Entrada> findAll(){
+	public List<Entrada> findAll() {
 		return entradaRepository.findAll();
 	}
 

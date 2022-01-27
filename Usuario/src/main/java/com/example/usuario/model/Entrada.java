@@ -1,7 +1,5 @@
 package com.example.usuario.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,11 +15,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "entrada", 
-		uniqueConstraints={
-                   @UniqueConstraint(columnNames = "id"),
-                  }
-)
+@Table(name = "entrada", uniqueConstraints = { @UniqueConstraint(columnNames = "id"), })
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "Entrada", description = "Clase Entrada")
@@ -31,11 +25,11 @@ public class Entrada {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Schema(name = "id", description = "Identificador único para la entrada", example = "1", required = true)
 	private long id;
-	
+
 	private boolean vip;
-	
+
 	private long usuario;
-	
+
 	@NotEmpty(message = "Necesitamos que se indique el evento")
 	private String evento;
 }
