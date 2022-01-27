@@ -33,26 +33,38 @@ public class EventoServiceImpl implements EventoService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public EventoDTO update(Evento evento) {
 		
-	Evento newEvento = eventoRepository.findById(evento.getId()).orElseThrow(EventoNotFoundException::new);
-	
-	return 
+		Evento newEvento = eventoRepository.findById(evento.getId()).orElseThrow(EventoNotFoundException::new);
+		newEvento.setNombre(evento.getNombre());
+		newEvento.setDescripcionCorta(evento.getDescripcionCorta());
+		newEvento.setDescripcionLarga(evento.getDescripcionLarga());
+		newEvento.setFechaEvento(evento.getFechaEvento());
+		newEvento.setFotoUrl(evento.getFotoUrl());
+		newEvento.setHoraEvento(evento.getHoraEvento());
+		newEvento.setPoliticaAcceso(evento.getPoliticaAcceso());
+		newEvento.setId(evento.getId());
+		newEvento.setRangoPrecios(evento.getRangoPrecios());
+		newEvento.setRecinto(evento.getRecinto());
+	 
+		return this.save(newEvento);
+	}
 
-=======
+	@Override
 	public void deleteById(String id) {
-		eventoRepository.deleteById(id);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public List<EventoDTO> findAllByGenero(String genero) {
-		return EventoAdapter.of(eventoRepository.findAllByGenero(genero));
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	@Override 
+
+	@Override
 	public List<EventoDTO> findAllByNombre(String nombre) {
-		return EventoAdapter.of(eventoRepository.findByNombre(nombre));
->>>>>>> 06cc10aa9e05f9fe53b5a168d34f6254b0dc48ab
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
