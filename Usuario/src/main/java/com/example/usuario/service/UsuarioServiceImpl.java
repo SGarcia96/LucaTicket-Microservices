@@ -30,6 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		usuario.setPassword(hashedPassword);
 		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
+		
 		return usuarioAdapter.of(usuarioRepository.save(usuario));
 	}
 
