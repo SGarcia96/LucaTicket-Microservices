@@ -42,7 +42,7 @@ public class UsuarioControllerTests {
 		
 		usuario.setNombre("Juan");
 		usuario.setApellido("Martinez");
-		usuario.setMail("j.martinez@gmail.com");
+		usuario.setMail("j.martino@gmail.com");
 		usuario.setPassword("12345");
 		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
 		logger.info(usuario.toString());
@@ -63,7 +63,7 @@ public class UsuarioControllerTests {
 		Usuario usuario = new Usuario();
 		usuario.setNombre("Juan");
 		//No se inserta apellido
-		usuario.setMail("j.martinez@gmail.com");
+		usuario.setMail("j.martino@gmail.com");
 		usuario.setPassword("12345");
 		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
 		logger.info(usuario.toString());
@@ -76,7 +76,7 @@ public class UsuarioControllerTests {
 		.then()
 			.statusCode(400)
 			.body("error", equalTo("BAD_REQUEST"))
-			.body("message[0]",equalTo("apellido: Necesitamos que indigues un apellido"));
+			.body("message[0]",equalTo("apellido: Necesitamos que indiques un apellido"));
 	}
 	
 	@Test
