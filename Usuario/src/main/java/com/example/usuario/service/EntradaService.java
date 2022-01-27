@@ -1,9 +1,17 @@
 package com.example.usuario.service;
 
-import com.example.usuario.dto.UsuarioDTO;
+import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.example.usuario.dto.UsuarioDTO;
+import com.example.usuario.model.Entrada;
+
+@Service
 public interface EntradaService {
 	
-	public Entrada addEntrada(long idUsuario, String idEvento, boolean vip);
+	public Entrada addEntrada(Entrada entrada);
+	
+	public List<Entrada> findAll();
 
 }
