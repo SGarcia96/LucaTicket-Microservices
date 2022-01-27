@@ -26,7 +26,6 @@ import lombok.NoArgsConstructor;
                    @UniqueConstraint(columnNames = "mail")
                   }
 )
-//@Table(name = "usuarios")
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "Usuario", description = "Clase Usuario")
@@ -41,7 +40,7 @@ public class Usuario {
 	@Size(min = 3, max = 30)
 	private String nombre;
 
-	@NotEmpty(message = "Necesitamos que indigues un apellido")
+	@NotEmpty(message = "Necesitamos que indiques un apellido")
 	@Size(min = 3, max = 30)
 	private String apellido;
 
