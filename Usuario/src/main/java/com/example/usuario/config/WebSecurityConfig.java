@@ -22,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
 			.antMatchers(HttpMethod.POST, "/usuarios").permitAll()
+			.antMatchers(HttpMethod.GET, "/usuarios").permitAll()
 			.anyRequest().authenticated();
 		
 /*
