@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.usuario.dto.UsuarioDTO;
@@ -73,6 +75,26 @@ public class UsuarioController {
 	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario) {
 		log.info("--- add usuario: " + usuario);
 		return new ResponseEntity<>(usuariosService.save(usuario), HttpStatus.CREATED);
+	}
+
+	@Operation(summary = "Login", description = "Permite a un usuario loguearse", tags = { "usuario" })
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario y contraseña correctos", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
+	@ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content),
+	@ApiResponse(responseCode = "400", description = "Contraseña incorrecta ", content = @Content)})
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestParam("usuario") String usuario, @RequestParam("password") String pwd) {
+
+		UsuarioDTO usuarioRegistrado = usuariosService.findByMail(usuario);
+
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		boolean isPasswordMatches = bcrypt.matches(pwd, usuarioRegistrado.getPassword());
+
+		if (!isPasswordMatches) {
+			throw new IncorrectPasswordException();
+		}
+		String token = usuariosService.getJWTToken(usuarioRegistrado);
+		return new ResponseEntity<>(token, HttpStatus.OK);
 	}
 
 }

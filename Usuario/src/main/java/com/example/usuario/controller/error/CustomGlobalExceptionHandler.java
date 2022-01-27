@@ -49,6 +49,13 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		// Saltará a la clase CustomErrorAttibuttes para crear un error personalizado
 		response.sendError(HttpStatus.NOT_FOUND.value());
 	}
+	
+	@ExceptionHandler(IncorrectPasswordException.class)
+	public void springHandleIncorrectPassword(HttpServletResponse response) throws IOException {
+		logger.info("------ IncorrectPasswordException() ");
+		// Saltará a la clase CustomErrorAttibuttes para crear un error personalizado
+		response.sendError(HttpStatus.BAD_REQUEST.value());
+	}
 
 	// @Validate For Validating Path Variables and Request Parameters
 	@ExceptionHandler(ConstraintViolationException.class)
