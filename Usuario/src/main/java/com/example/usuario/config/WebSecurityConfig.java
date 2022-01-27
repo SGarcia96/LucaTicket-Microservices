@@ -6,16 +6,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import io.swagger.v3.oas.models.PathItem.HttpMethod;
+import com.example.usuario.security.JWTAuthorizationFilter;
+
+import org.springframework.http.HttpMethod;
 
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	/*
-	 * se permiten todas las llamadas al controlador /user, 
-	 * pero el resto de las llamadas requieren autenticación.
-	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
@@ -25,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/usuarios").permitAll()
 			.anyRequest().authenticated();
 		
+		// Voy a dejar esto hasta que tengamos todos los métodos luego lo borramos
 /*
  *              .antMatchers(HttpMethod.GET, "/user/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/user").hasRole("ADMIN")
