@@ -45,7 +45,7 @@ public class EntradaController {
 			@ApiResponse(responseCode = "404", description = "Entradas no encontradas (NO implementadas)", content = @Content) })
 	@GetMapping
 	public List<Entrada> getAllEntrada(){
-		log.info("--- todos los eventos");
+		log.info("--- todos los entradas");
 		final List<Entrada> all = entradaService.findAll();
 		return all;
 

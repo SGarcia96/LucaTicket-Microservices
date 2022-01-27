@@ -7,7 +7,6 @@ import com.example.usuario.model.Entrada;
 
 @Repository
 public interface EntradaRepository extends JpaRepository<Entrada,String>{
-	public Entrada addEntrada(Long idUsuario,String idEvento, boolean vip);
 }
 
 
