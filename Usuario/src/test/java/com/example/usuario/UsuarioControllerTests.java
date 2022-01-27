@@ -26,15 +26,13 @@ public class UsuarioControllerTests {
 		baseURI = "http://localhost:8888";
 		basePath = "/usuarios";
 	}
+	
 	@Test
 	public void shouldGetAllUsuariosWithStatus200() {
 		when()
 			.get()
 		.then()
 			.statusCode(200);
-			//.assertThat()
-			//.body("size()", greaterThan(0));
-			
 	}
 	
 	@Test
@@ -79,7 +77,6 @@ public class UsuarioControllerTests {
 			.statusCode(400)
 			.body("error", equalTo("BAD_REQUEST"))
 			.body("message[0]",equalTo("apellido: Necesitamos que indigues un apellido"));
-		
-		}
 	}
+}
 
