@@ -34,7 +34,7 @@ public class Entrada {
 	
 	private boolean vip;
 	
-	private int usuario;
+	private long usuario;
 	
 	@NotEmpty(message = "Necesitamos que se indique el evento")
 	private String evento;
