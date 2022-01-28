@@ -20,6 +20,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/usuarios/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/usuarios").permitAll()
+				.antMatchers(HttpMethod.GET, "/swagger-ui.html/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/v3/**").permitAll()
 				.anyRequest().authenticated();
 
 		// Voy a dejar esto hasta que tengamos todos los métodos luego lo borramos

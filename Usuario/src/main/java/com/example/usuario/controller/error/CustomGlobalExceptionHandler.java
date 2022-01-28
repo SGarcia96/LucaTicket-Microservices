@@ -64,11 +64,10 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 	
-	// @Validate For Validating Path Variables and Request Parameters
 	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-	public void sqlConstraintViolationException(HttpServletResponse response) throws IOException {
+	public void sqlConstraintViolationException(SQLIntegrityConstraintViolationException ex, HttpServletResponse response) throws IOException {
 		logger.info("------ SQLConstraintViolationException() ");
-		response.sendError(HttpStatus.BAD_REQUEST.value(), "El correo ya existe");
+		response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 	}
 
 	// error handle for @Valid
