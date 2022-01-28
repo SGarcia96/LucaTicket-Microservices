@@ -4,13 +4,11 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.example.usuario.model.EventoDTO;
+import com.example.usuario.model.Evento;
 
-//Se añade este nombre : spring.application.name=evento
-//Indico que voy a contactar con esa ruta
-@FeignClient(name = "evento", url= "http://localhost:7777")
+@FeignClient(name = "evento", url = "http://localhost:7777")
 public interface EventoFeignClient {
-	
+
 	@GetMapping("/eventos/{id}")
-    EventoDTO getEvento (@PathVariable String id);
+	Evento getEvento(@PathVariable String id);
 }

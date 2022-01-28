@@ -2,28 +2,32 @@ package com.example.usuario.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+
+import com.example.usuario.utils.RandomNumber;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@Embeddable
 public class EventoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private String id;
-	private String nombre;
-	private int aforo;
-	private float[] rangoPrecios;
-	/*
-	public static EventoDTO of(EntradaEvento evento) {
-		EventoDTO event = new EventoDTO();
-		event.setId(evento.getId());
-		event.setNombre(evento.getNombre());
-		event.setAforo(evento.getAforo());
-		event.setRangoPrecios(evento.getRangoPrecios());
 
-		return event;
+	private String evento;
+	private int aforo;
+	private float precio;
+
+	public static EventoDTO of(Evento evento) {
+		EventoDTO eventoDTO = new EventoDTO();
+		eventoDTO.setEvento(evento.getNombre());
+		eventoDTO.setAforo(evento.getAforo());
+		float[] rangoPrecios = evento.getRangoPrecios();
+		eventoDTO.setPrecio(RandomNumber.creaFloatRandom(rangoPrecios[1], rangoPrecios[0]));
+
+		return eventoDTO;
 	}
-	*/
+
 }

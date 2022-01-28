@@ -4,14 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Entrada;
+import com.example.usuario.model.EventoDTO;
 
 @Service
 public interface EntradaService {
-	
-	public Entrada addEntrada(Entrada entrada);
-	
+
 	public List<Entrada> findAll();
+
+	public void addEntrada(Long idUsuario, String idEvento);
+
+	public Entrada saveEntrada(Long idUsuario, EventoDTO evento);
 
 }

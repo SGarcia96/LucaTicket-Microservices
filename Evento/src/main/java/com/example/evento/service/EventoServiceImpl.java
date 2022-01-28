@@ -32,10 +32,7 @@ public class EventoServiceImpl implements EventoService {
 		return EventoAdapter.of(eventoRepository.findById(id).orElseThrow(EventoNotFoundException::new));
 	}
 
-	
-	
 	public EventoDTO update(Evento evento) {
-		
 		Evento newEvento = eventoRepository.findById(evento.getId()).orElseThrow(EventoNotFoundException::new);
 		newEvento.setNombre(evento.getNombre());
 		newEvento.setDescripcionCorta(evento.getDescripcionCorta());
@@ -47,7 +44,7 @@ public class EventoServiceImpl implements EventoService {
 		newEvento.setId(evento.getId());
 		newEvento.setRangoPrecios(evento.getRangoPrecios());
 		newEvento.setRecinto(evento.getRecinto());
-	 
+
 		return this.save(newEvento);
 	}
 
@@ -69,23 +66,18 @@ public class EventoServiceImpl implements EventoService {
 		return this.save(newEvento);
 	}
 
-
 	@Override
 	public void deleteById(String id) {
-		// TODO Auto-generated method stub
-		
+		eventoRepository.deleteById(id);
 	}
 
 	@Override
 	public List<EventoDTO> findAllByGenero(String genero) {
-		// TODO Auto-generated method stub
-		return null;
+		return EventoAdapter.of(eventoRepository.findAllByGenero(genero));
 	}
 
 	@Override
 	public List<EventoDTO> findAllByNombre(String nombre) {
-
 		return EventoAdapter.of(eventoRepository.findByNombre(nombre));
-
 	}
 }

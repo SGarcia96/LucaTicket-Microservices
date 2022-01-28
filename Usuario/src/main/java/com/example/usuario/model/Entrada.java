@@ -1,12 +1,13 @@
 package com.example.usuario.model;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -26,10 +27,10 @@ public class Entrada {
 	@Schema(name = "id", description = "Identificador único para la entrada", example = "1", required = true)
 	private long id;
 
-	private boolean vip;
+	private long usuario;
 
-	private long idUsuario;
+	@NotNull
+	@Embedded 
+	private EventoDTO evento;
 
-	@NotEmpty(message = "Necesitamos que se indique el evento")
-	private String evento;
 }
