@@ -6,8 +6,6 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.example.usuario.model.Entrada;
 import com.example.usuario.model.EventoDTO;
-import com.example.usuario.model.Usuario;
 
 @ActiveProfiles("dev")
 public class EntradaControllerTests {
