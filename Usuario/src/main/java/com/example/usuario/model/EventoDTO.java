@@ -23,7 +23,7 @@ public class EventoDTO implements Serializable {
 	public static EventoDTO of(Evento evento) {
 		EventoDTO eventoDTO = new EventoDTO();
 		eventoDTO.setEvento(evento.getNombre());
-		eventoDTO.setAforo(evento.getAforo());
+		eventoDTO.setAforo(evento.getRecinto().getAforo());
 		float[] rangoPrecios = evento.getRangoPrecios();
 		eventoDTO.setPrecio(RandomNumber.creaFloatRandom(rangoPrecios[1], rangoPrecios[0]));
 
