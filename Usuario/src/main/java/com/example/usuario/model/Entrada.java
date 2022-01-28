@@ -30,7 +30,7 @@ public class Entrada {
 	private long usuario;
 
 	@NotNull
-	@Embedded 
+	@Embedded
 	private EventoDTO evento;
 
 }

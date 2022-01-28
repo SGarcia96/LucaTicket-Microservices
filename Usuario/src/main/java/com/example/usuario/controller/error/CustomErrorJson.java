@@ -16,8 +16,6 @@ public class CustomErrorJson {
 	private String trace;
 	private List<String> message;
 	private String path;
-
-	// Extras
 	private String jdk;
 
 	public CustomErrorJson() {
@@ -51,11 +49,11 @@ public class CustomErrorJson {
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
-	
-	//Variacion
+
+	// Variacion
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = this.changeTimeStamp(timestamp);
-	}	
+	}
 
 	public int getStatus() {
 		return status;
@@ -81,8 +79,6 @@ public class CustomErrorJson {
 		this.trace = trace;
 	}
 
-
-
 	public List<String> getMessage() {
 		return message;
 	}
@@ -106,8 +102,6 @@ public class CustomErrorJson {
 	public void setJdk(String jdk) {
 		this.jdk = jdk;
 	}
-	
-	
 
 	@Override
 	public String toString() {

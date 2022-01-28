@@ -35,7 +35,7 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
 		logger.info("------ getErrorAttributes(): " + options);
 		// TODO Auto-generated method stub
 		Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
-		logger.info("------ getErrorAttributes(): " + options);		
+		logger.info("------ getErrorAttributes(): " + options);
 
 		// format & update timestamp
 		Object timestamp = errorAttributes.get("timestamp");

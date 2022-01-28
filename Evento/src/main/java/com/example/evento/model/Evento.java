@@ -22,9 +22,9 @@ import lombok.NoArgsConstructor;
 public class Evento {
 	@Id
 	private String id;
-	
+
 	@NotEmpty
-	@Size(min=3, max=30)
+	@Size(min = 3, max = 30)
 	private String nombre;
 
 	@NotEmpty(message = "La descripcionCorta no debe ser vacío")
@@ -44,7 +44,7 @@ public class Evento {
 	@NotEmpty
 	@JsonFormat(pattern = "hh:mm")
 	private String horaEvento;
-	
+
 	@NotEmpty
 	private float[] rangoPrecios;
 
@@ -56,5 +56,5 @@ public class Evento {
 
 	@NotNull
 	private Recinto recinto;
-	
+
 }

@@ -16,7 +16,7 @@ import com.example.evento.controller.EventoController;
 
 @Component
 public class CustomErrorAttributes extends DefaultErrorAttributes {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(EventoController.class);
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
