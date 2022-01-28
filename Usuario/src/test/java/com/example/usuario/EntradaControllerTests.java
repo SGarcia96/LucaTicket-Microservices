@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.usuario.model.Entrada;
+import com.example.usuario.model.EventoDTO;
 import com.example.usuario.model.Usuario;
 
 @ActiveProfiles("dev")
@@ -40,10 +41,8 @@ public class EntradaControllerTests {
 	public void shouldAddEntradaWithStatus201() {
 		logger.info("----TEST ENTRADA CREADA-----");
 		Entrada entrada = new Entrada();
-
-		entrada.setVip(true);
+		entrada.setEvento(new EventoDTO());
 		entrada.setUsuario(16);
-		entrada.setEvento("eventillo");
 		logger.info(entrada.toString());
 		
 		given()
@@ -61,7 +60,6 @@ public class EntradaControllerTests {
 		logger.info("----TEST CAMPO VACIO-----");
 		Entrada entrada = new Entrada();
 		entrada.setUsuario(1111111111);
-		entrada.setVip(true);
 		//No se inserta evento
 		logger.info(entrada.toString());
 		
