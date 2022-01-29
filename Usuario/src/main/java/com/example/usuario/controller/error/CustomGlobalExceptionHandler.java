@@ -23,17 +23,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-/*
-Add one class extending ResponseEntityExceptionHandler and annotate it with @ControllerAdvice annotation.
-
-ResponseEntityExceptionHandler is a convenient base class for to provide centralized exception
-handling across all @RequestMapping methods through @ExceptionHandler methods. 
-@ControllerAdvice is more for enabling auto-scanning and configuration at application startup.
-
-si usas ResponseEntityExceptionHandler tienes un logger embebido
-
-*/
-
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -49,7 +38,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		// Saltará a la clase CustomErrorAttibuttes para crear un error personalizado
 		response.sendError(HttpStatus.NOT_FOUND.value());
 	}
-	
+
 	@ExceptionHandler(IncorrectPasswordException.class)
 	public void springHandleIncorrectPassword(HttpServletResponse response) throws IOException {
 		logger.info("------ IncorrectPasswordException() ");
@@ -63,9 +52,10 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		logger.info("------ ConstraintViolationException() ");
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
-	
+
 	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-	public void sqlConstraintViolationException(SQLIntegrityConstraintViolationException ex, HttpServletResponse response) throws IOException {
+	public void sqlConstraintViolationException(SQLIntegrityConstraintViolationException ex,
+			HttpServletResponse response) throws IOException {
 		logger.info("------ SQLConstraintViolationException() ");
 		response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 	}

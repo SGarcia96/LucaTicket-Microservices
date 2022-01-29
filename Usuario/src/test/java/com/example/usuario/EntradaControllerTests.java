@@ -6,8 +6,6 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.usuario.model.Entrada;
-import com.example.usuario.model.Usuario;
+import com.example.usuario.model.EventoDTO;
 
 @ActiveProfiles("dev")
 public class EntradaControllerTests {
@@ -40,10 +38,8 @@ public class EntradaControllerTests {
 	public void shouldAddEntradaWithStatus201() {
 		logger.info("----TEST ENTRADA CREADA-----");
 		Entrada entrada = new Entrada();
-
-		entrada.setVip(true);
+		entrada.setEvento(new EventoDTO());
 		entrada.setUsuario(16);
-		entrada.setEvento("eventillo");
 		logger.info(entrada.toString());
 		
 		given()
@@ -61,7 +57,6 @@ public class EntradaControllerTests {
 		logger.info("----TEST CAMPO VACIO-----");
 		Entrada entrada = new Entrada();
 		entrada.setUsuario(1111111111);
-		entrada.setVip(true);
 		//No se inserta evento
 		logger.info(entrada.toString());
 		

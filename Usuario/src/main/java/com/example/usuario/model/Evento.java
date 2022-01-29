@@ -9,7 +9,7 @@ public class Evento {
 
 	private String idEvento;
 	private String nombre;
-	private int aforo;
+	private Recinto recinto;
 	private float[] rangoPrecios;
 
 }

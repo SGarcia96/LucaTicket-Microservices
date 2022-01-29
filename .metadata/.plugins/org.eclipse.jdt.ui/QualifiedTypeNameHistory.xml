@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.example.evento.model.Recinto"/>
-    <fullyQualifiedTypeName name="org.springframework.validation.annotation.Validated"/>
     <fullyQualifiedTypeName name="com.example.evento.controller.error.EventoNotFoundException"/>
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.Parameter"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
@@ -53,11 +51,13 @@
     <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
     <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.openfeign.EnableFeignClients"/>
     <fullyQualifiedTypeName name="com.example.usuario.feignclients.EventoFeignClient"/>
     <fullyQualifiedTypeName name="com.example.usuario.model.EventoDTO"/>
     <fullyQualifiedTypeName name="com.example.usuario.model.Usuario"/>
     <fullyQualifiedTypeName name="com.example.usuario.model.EntradaEvento"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="javax.persistence.Embedded"/>
+    <fullyQualifiedTypeName name="javax.persistence.Embeddable"/>
 </qualifiedTypeNameHistroy>
