@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.evento.model.Evento;
 import com.example.evento.model.Recinto;
@@ -15,6 +16,8 @@ import static org.hamcrest.Matchers.greaterThan;
 
 import java.time.LocalDate;
 
+/* Estos test solo funcionan si está levantado el server de Eureka */
+@ActiveProfiles("dev")
 public class EventoControllerTest {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EventoControllerTest.class);
@@ -47,6 +50,7 @@ public class EventoControllerTest {
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
+		evento.setGenero("hombre");
 		evento.setFechaEvento(LocalDate.now());
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
@@ -71,6 +75,7 @@ public class EventoControllerTest {
 		evento.setDescripcionCorta("dcorta");
 		evento.setDescripcionLarga("dlarga");
 		evento.setFotoUrl("m.jpg");
+		evento.setGenero("rock");
 		evento.setFechaEvento(LocalDate.now());
 		evento.setHoraEvento("20:00");
 		evento.setPoliticaAcceso("pacc");
@@ -85,7 +90,7 @@ public class EventoControllerTest {
 		.then()
 			.statusCode(400)
 			.body("error", equalTo("BAD_REQUEST"))
-//			.body("message[0]", equalTo("nombre: no debe estar vacío"))
+		//	.body("message[0]", equalTo("nombre: no debe estar vacío"));
 			.body("message[1]", equalTo("nombre: el tamaño debe estar entre 3 y 30"));
 	}
 	
@@ -93,12 +98,12 @@ public class EventoControllerTest {
 	@Test
 	public void shouldGetEventoByIdWithStatus200() {
 		when()
-			.get("/61f012bd80dacc7180e36747")
+			.get("/61f112f0670e7222a44331bd")
 		.then()
 			.statusCode(200)
 			.assertThat()
 			.body("size()", greaterThan(0))
-			.body("nombre", equalTo("eventito 2.0"));
+			.body("nombre", equalTo("eventito"));
 	}
 	
 	// GET /eventos/{id}

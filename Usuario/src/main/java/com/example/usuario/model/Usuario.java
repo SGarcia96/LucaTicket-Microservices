@@ -20,12 +20,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "usuarios", 
-		uniqueConstraints={
-                   @UniqueConstraint(columnNames = "id"),
-                   @UniqueConstraint(columnNames = "mail")
-                  }
-)
+@Table(name = "usuarios", uniqueConstraints = { @UniqueConstraint(columnNames = "id"),
+		@UniqueConstraint(columnNames = "mail") })
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(name = "Usuario", description = "Clase Usuario")

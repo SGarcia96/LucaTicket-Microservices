@@ -42,7 +42,8 @@ public class EventoController {
 	@Autowired
 	private EventoService eventoService;
 
-	@Operation(summary = "Buscar todos los eventos", description = "devuelve todos los eventos registrados", tags= {"evento"})
+	@Operation(summary = "Buscar todos los eventos", description = "devuelve todos los eventos registrados", tags = {
+			"evento" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
@@ -69,6 +70,36 @@ public class EventoController {
 		return evento;
 	}
 
+	@Operation(summary = "Buscar eventos por género", description = "Dado un género, devuelve todos los eventos de dicho género", tags = {
+			"evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
+	@GetMapping("findAllByGenero/{genero}")
+	public List<EventoDTO> getAllEventosByGenero(
+			@Parameter(description = "Género del evento a localizar", required = true) @PathVariable("genero") String genero) {
+		log.info("--- eventos por genero " + genero);
+		final List<EventoDTO> eventos = eventoService.findAllByGenero(genero);
+		return eventos;
+	}
+
+	@Operation(summary = "Buscar eventos por nombre", description = "Dado un nombre, devuelve uno o varios objetos Evento", tags = {
+			"evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
+	@GetMapping("findAllByNombre/{nombre}")
+	public List<EventoDTO> findAllByNombre(
+			@Parameter(description = "Nombre del evento a localizar", required = true) @PathVariable("nombre") String nombre) {
+		log.info("--- eventos por nombre " + nombre);
+		final List<EventoDTO> eventos = eventoService.findAllByNombre(nombre);
+		return eventos;
+	}
+
 	@Operation(summary = "Añade un Evento", description = "Añade un evento a la coleccion eventos", tags = { "evento" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "201", description = "Evento añadido", content = {
@@ -79,15 +110,16 @@ public class EventoController {
 		EventoDTO newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
 	}
-	
-	@Operation(summary = "Editar un Evento", description = "Dado el ID de un evento y sus campos modificados, actualiza el evento", tags = { "evento" })
+
+	@Operation(summary = "Editar un Evento", description = "Dado el ID de un evento y sus campos modificados, actualiza el evento", tags = {
+			"evento" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Evento modificado", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
 			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Evento no encontrado (ID no existe)", content = @Content)})
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado (ID no existe)", content = @Content) })
 	@PutMapping("/{id}")
-	public ResponseEntity<EventoDTO> updateEvento(@PathVariable("id") String id, @Valid @RequestBody Evento evento){
+	public ResponseEntity<EventoDTO> updateEvento(@PathVariable("id") String id, @Valid @RequestBody Evento evento) {
 		EventoDTO newEvento = eventoService.update(id, evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.OK);
 	}
@@ -105,36 +137,4 @@ public class EventoController {
 		eventoService.deleteById(id);
 	}
 
-	@Operation(summary = "Buscar eventos por género", description = "Dado un género, devuelve todos los eventos de dicho género", tags = {
-			"evento" })
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
-	@GetMapping("findAllByGenero/{genero}")
-	public List<EventoDTO> getAllEventosByGenero(
-			@Parameter(description = "Género del evento a localizar", required = true) @PathVariable("genero") String genero) {
-		log.info("--- eventos por genero " + genero);
-		final List<EventoDTO> eventos = eventoService.findAllByGenero(genero);
-		return eventos;
-	}
-
-	@Operation(summary = "Buscar eventos por nombre", description = "Dado un nombre, devuelve uno o varios objetos Evento", tags= {"evento"})
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
-	@GetMapping("findAllByNombre/{nombre}")
-	public List<EventoDTO> findAllByNombre(
-			@Parameter(description = "Nombre del evento a localizar", required=true)
-			@PathVariable("nombre") String nombre) {
-		log.info("--- eventos por nombre " + nombre);
-		final List<EventoDTO> eventos = eventoService.findAllByNombre(nombre);
-		return eventos;
-	}
-
 }
-	
-
