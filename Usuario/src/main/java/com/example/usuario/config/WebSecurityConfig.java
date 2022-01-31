@@ -18,7 +18,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests().antMatchers(HttpMethod.POST, "/usuarios").permitAll()
-				.antMatchers(HttpMethod.GET, "/usuarios").permitAll().anyRequest().authenticated();
+				.antMatchers(HttpMethod.GET, "/usuarios").permitAll().antMatchers(HttpMethod.POST, "/entrada").permitAll().anyRequest().authenticated();
+			
 
 		// Voy a dejar esto hasta que tengamos todos los métodos luego lo borramos
 		/*
