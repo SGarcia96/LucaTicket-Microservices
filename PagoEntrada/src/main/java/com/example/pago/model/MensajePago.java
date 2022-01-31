@@ -1,5 +1,7 @@
 package com.example.pago.model;
 
+import org.springframework.http.HttpStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MensajePago {
 
-	private int codigo;
 	private String mensaje;
+	private HttpStatus codigo;
 
 }

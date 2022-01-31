@@ -2,6 +2,7 @@ package com.example.usuario.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.usuario.model.Entrada;
@@ -12,7 +13,7 @@ public interface EntradaService {
 
 	public List<Entrada> findAll();
 
-	public void addEntrada(Long idUsuario, String idEvento);
+	public ResponseEntity<?> addEntrada(Long idUsuario, String idEvento);
 
 	public Entrada saveEntrada(Long idUsuario, EventoDTO evento);
 

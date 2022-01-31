@@ -1,5 +1,7 @@
 package com.example.pago.service;
 
-public interface PagoService {
+import com.example.pago.model.MensajePago;
 
+public interface PagoService {
+	public MensajePago generaMensajeDePago(int aforoTotal, int entradasVendidas, float precio);
 }
