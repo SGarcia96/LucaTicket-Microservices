@@ -23,8 +23,8 @@ public class Evento {
 	@Id
 	private String id;
 
-	@NotEmpty
-	@Size(min = 3, max = 30)
+	@NotEmpty(message = "no debe estar vacío")
+	@Size(min = 3, max = 30, message = "el tamaño debe estar entre 3 y 30")
 	private String nombre;
 
 	@NotEmpty(message = "La descripcionCorta no debe ser vacío")
