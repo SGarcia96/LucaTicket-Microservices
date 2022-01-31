@@ -67,7 +67,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 								.map(GrantedAuthority::getAuthority)
 								.collect(Collectors.toList()))
 				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + 600000))
+				.setExpiration(new Date(System.currentTimeMillis() + 1000000))
 				//se define la clave de encriptación y el algoritmo para generar el hash
 				.signWith(SignatureAlgorithm.HS512,
 						secretKey.getBytes()).compact();
