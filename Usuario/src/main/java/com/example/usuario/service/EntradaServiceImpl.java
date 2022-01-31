@@ -32,6 +32,7 @@ public class EntradaServiceImpl implements EntradaService {
 	private PagoFeignClient pagoFeignClient;
 
 	@Override
+<<<<<<< HEAD
 	public ResponseEntity<?> addEntrada(Long idUsuario, String idEvento) {
 		final EventoDTO evento = EventoDTO.of(eventoFeign.getEvento(idEvento));
 		ResponseEntity<?> response = pagoFeignClient.verificaPago(evento.getAforo(), 100, evento.getPrecio());
@@ -39,6 +40,12 @@ public class EntradaServiceImpl implements EntradaService {
 			this.saveEntrada(idUsuario, evento);	
 		}
 		return response;
+=======
+	public void addEntrada(Long idUsuario, String idEvento) {
+		final EventoDTO evento = eventoFeign.getEvento(idEvento);
+
+		this.saveEntrada(idUsuario, evento);
+>>>>>>> 0cb469532992427dc561ff7f608c7ea30cab9790
 	}
 
 	@Override

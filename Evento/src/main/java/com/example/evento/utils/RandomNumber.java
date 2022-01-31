@@ -1,4 +1,4 @@
-package com.example.usuario.utils;
+package com.example.evento.utils;
 
 public class RandomNumber {
 

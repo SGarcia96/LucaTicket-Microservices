@@ -6,19 +6,19 @@ import com.example.evento.model.EventoDTO;
 
 public interface EventoService {
 	
-	public EventoDTO save(Evento evento);
+	public Evento save(Evento evento);
 	
-	public List<EventoDTO> findAll();
+	public List<Evento> findAll();
 	
-	public EventoDTO findById(String id);
+	public Evento findById(String id);
 
-	public EventoDTO update(String id, Evento evento);
+	public Evento update(String id, Evento evento);
 
 	public void deleteById(String id);
 	
-	public List<EventoDTO> findAllByGenero(String genero);
+	public List<Evento> findAllByGenero(String genero);
 
-	public List<EventoDTO> findAllByNombre(String nombre);
+	public List<Evento> findAllByNombre(String nombre);
 
 
 }

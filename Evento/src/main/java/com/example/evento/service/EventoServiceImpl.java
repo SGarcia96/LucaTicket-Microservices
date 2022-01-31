@@ -18,21 +18,21 @@ public class EventoServiceImpl implements EventoService {
 	private EventoRepository eventoRepository;
 
 	@Override
-	public EventoDTO save(Evento evento) {
-		return EventoAdapter.of(eventoRepository.save(evento));
+	public Evento save(Evento evento) {
+		return eventoRepository.save(evento);
 	}
 
 	@Override
-	public List<EventoDTO> findAll() {
-		return EventoAdapter.of(eventoRepository.findAll());
+	public List<Evento> findAll() {
+		return eventoRepository.findAll();
 	}
 
 	@Override
-	public EventoDTO findById(String id) {
-		return EventoAdapter.of(eventoRepository.findById(id).orElseThrow(EventoNotFoundException::new));
+	public Evento findById(String id) {
+		return eventoRepository.findById(id).orElseThrow(EventoNotFoundException::new);
 	}
 
-	public EventoDTO update(Evento evento) {
+	public Evento update(Evento evento) {
 		Evento newEvento = eventoRepository.findById(evento.getId()).orElseThrow(EventoNotFoundException::new);
 		newEvento.setNombre(evento.getNombre());
 		newEvento.setDescripcionCorta(evento.getDescripcionCorta());
@@ -49,7 +49,7 @@ public class EventoServiceImpl implements EventoService {
 	}
 
 	@Override
-	public EventoDTO update(String id, Evento evento) {
+	public Evento update(String id, Evento evento) {
 
 		Evento newEvento = eventoRepository.findById(id).orElseThrow(EventoNotFoundException::new);
 		newEvento.setNombre(evento.getNombre());
@@ -72,12 +72,12 @@ public class EventoServiceImpl implements EventoService {
 	}
 
 	@Override
-	public List<EventoDTO> findAllByGenero(String genero) {
-		return EventoAdapter.of(eventoRepository.findAllByGenero(genero));
+	public List<Evento> findAllByGenero(String genero) {
+		return eventoRepository.findAllByGenero(genero);
 	}
 
 	@Override
-	public List<EventoDTO> findAllByNombre(String nombre) {
-		return EventoAdapter.of(eventoRepository.findByNombre(nombre));
+	public List<Evento> findAllByNombre(String nombre) {
+		return eventoRepository.findByNombre(nombre);
 	}
 }
