@@ -26,7 +26,7 @@ public class EntradaServiceImpl implements EntradaService {
 
 	@Override
 	public void addEntrada(Long idUsuario, String idEvento) {
-		final EventoDTO evento = EventoDTO.of(eventoFeign.getEvento(idEvento));
+		final EventoDTO evento = eventoFeign.getEvento(idEvento);
 
 		this.saveEntrada(idUsuario, evento);
 	}

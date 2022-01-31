@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.model.Evento;
 import com.example.evento.model.EventoDTO;
 import com.example.evento.service.EventoService;
@@ -50,9 +51,9 @@ public class EventoController {
 			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
 	@GetMapping
-	public List<EventoDTO> getAllEventos() {
+	public List<Evento> getAllEventos() {
 		log.info("--- todos los eventos");
-		final List<EventoDTO> all = eventoService.findAll();
+		final List<Evento> all = eventoService.findAll();
 		return all;
 	}
 
@@ -66,7 +67,7 @@ public class EventoController {
 	public EventoDTO getEvento(
 			@Parameter(description = "ID del evento a localizar", required = true) @PathVariable("id") String id) {
 		log.info("--- evento por id " + id);
-		final EventoDTO evento = eventoService.findById(id);
+		final EventoDTO evento = EventoAdapter.of(eventoService.findById(id));
 		return evento;
 	}
 
@@ -78,10 +79,10 @@ public class EventoController {
 			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
 	@GetMapping("findAllByGenero/{genero}")
-	public List<EventoDTO> getAllEventosByGenero(
+	public List<Evento> getAllEventosByGenero(
 			@Parameter(description = "Género del evento a localizar", required = true) @PathVariable("genero") String genero) {
 		log.info("--- eventos por genero " + genero);
-		final List<EventoDTO> eventos = eventoService.findAllByGenero(genero);
+		final List<Evento> eventos = eventoService.findAllByGenero(genero);
 		return eventos;
 	}
 
@@ -93,10 +94,10 @@ public class EventoController {
 			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
 	@GetMapping("findAllByNombre/{nombre}")
-	public List<EventoDTO> findAllByNombre(
+	public List<Evento> findAllByNombre(
 			@Parameter(description = "Nombre del evento a localizar", required = true) @PathVariable("nombre") String nombre) {
 		log.info("--- eventos por nombre " + nombre);
-		final List<EventoDTO> eventos = eventoService.findAllByNombre(nombre);
+		final List<Evento> eventos = eventoService.findAllByNombre(nombre);
 		return eventos;
 	}
 
@@ -106,8 +107,8 @@ public class EventoController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
 			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content) })
 	@PostMapping
-	public ResponseEntity<EventoDTO> addEvento(@Valid @RequestBody Evento evento) {
-		EventoDTO newEvento = eventoService.save(evento);
+	public ResponseEntity<Evento> addEvento(@Valid @RequestBody Evento evento) {
+		Evento newEvento = eventoService.save(evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.CREATED);
 	}
 
@@ -119,8 +120,8 @@ public class EventoController {
 			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado (ID no existe)", content = @Content) })
 	@PutMapping("/{id}")
-	public ResponseEntity<EventoDTO> updateEvento(@PathVariable("id") String id, @Valid @RequestBody Evento evento) {
-		EventoDTO newEvento = eventoService.update(id, evento);
+	public ResponseEntity<Evento> updateEvento(@PathVariable("id") String id, @Valid @RequestBody Evento evento) {
+		Evento newEvento = eventoService.update(id, evento);
 		return new ResponseEntity<>(newEvento, HttpStatus.OK);
 	}
 

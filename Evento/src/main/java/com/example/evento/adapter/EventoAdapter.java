@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.evento.model.Evento;
 import com.example.evento.model.EventoDTO;
+import com.example.evento.utils.RandomNumber;
 
 @Component
 public class EventoAdapter {
@@ -15,15 +16,8 @@ public class EventoAdapter {
 		EventoDTO eventoDTO= new EventoDTO();
 		eventoDTO.setId(evento.getId());
 		eventoDTO.setNombre(evento.getNombre());
-		eventoDTO.setDescripcionCorta(evento.getDescripcionCorta());
-		eventoDTO.setDescripcionLarga(evento.getDescripcionLarga());
-		eventoDTO.setFotoUrl(evento.getFotoUrl());
-		eventoDTO.setFechaEvento(evento.getFechaEvento());
-		eventoDTO.setHoraEvento(evento.getHoraEvento());
-		eventoDTO.setRangoPrecios(evento.getRangoPrecios());
-		eventoDTO.setPoliticaAcceso(evento.getPoliticaAcceso());
-		eventoDTO.setGenero(evento.getGenero());
-		eventoDTO.setRecinto(evento.getRecinto());
+		eventoDTO.setPrecio(RandomNumber.creaFloatRandom(evento.getRangoPrecios()[0], evento.getRangoPrecios()[1]));
+		eventoDTO.setAforo(evento.getRecinto().getAforo());
 		return eventoDTO;
 	}
 	
@@ -32,4 +26,6 @@ public class EventoAdapter {
 				.map(p -> of(p))
 				.collect(Collectors.toList());
 	}
+
+	
 }
