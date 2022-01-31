@@ -11,6 +11,7 @@ import com.example.usuario.feignclients.EventoFeignClient;
 import com.example.usuario.feignclients.PagoFeignClient;
 import com.example.usuario.model.Entrada;
 import com.example.usuario.model.EventoDTO;
+import com.example.usuario.model.MensajePago;
 import com.example.usuario.model.Usuario;
 import com.example.usuario.repository.EntradaRepository;
 import com.example.usuario.repository.UsuarioRepository;
@@ -32,20 +33,13 @@ public class EntradaServiceImpl implements EntradaService {
 	private PagoFeignClient pagoFeignClient;
 
 	@Override
-<<<<<<< HEAD
-	public ResponseEntity<?> addEntrada(Long idUsuario, String idEvento) {
-		final EventoDTO evento = EventoDTO.of(eventoFeign.getEvento(idEvento));
-		ResponseEntity<?> response = pagoFeignClient.verificaPago(evento.getAforo(), 100, evento.getPrecio());
-		if(response.getStatusCode().value() == 200) {
-			this.saveEntrada(idUsuario, evento);	
+	public MensajePago addEntrada(Long idUsuario, String idEvento) {
+		final EventoDTO evento = eventoFeign.getEvento(idEvento);
+		MensajePago response = pagoFeignClient.verificaPago(evento.getAforo(), entradaRepository.findAllByEvento(evento).size(), evento.getPrecio());
+		if(response.getCodigo().value() == 200) {
+			saveEntrada(idUsuario, evento);	
 		}
 		return response;
-=======
-	public void addEntrada(Long idUsuario, String idEvento) {
-		final EventoDTO evento = eventoFeign.getEvento(idEvento);
-
-		this.saveEntrada(idUsuario, evento);
->>>>>>> 0cb469532992427dc561ff7f608c7ea30cab9790
 	}
 
 	@Override
