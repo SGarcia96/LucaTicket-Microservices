@@ -29,26 +29,16 @@ public class PagoController {
 
 	@Autowired
 	private PagoService pagoService;
-	
-/*	@Operation(summary = "Verificar pago", description = "Dados unos datos, devuelve una tarjeta", tags = {
-	"pago" })
-	@ApiResponses(value = {
-		@ApiResponse(responseCode = "200", description = "Tarjeta guardada", content = {
-				@Content(mediaType = "application/json", schema = @Schema(implementation = MensajePago.class)) }),
-		@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
-		@ApiResponse(responseCode = "404", description = "Pago no encontrado", content = @Content) })
-	@PostMapping 
-	public void ingresarTarjeta() {
-		
-	}*/
 
 	@Operation(summary = "Verificar pago", description = "Dada una entrada comprada, devuelve información del pago", tags = {
 			"pago" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Pago correcto", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = MensajePago.class)) }),
-			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Pago no encontrado", content = @Content) })
+			@ApiResponse(responseCode = "406", description = "Tarjeta caducada", content = @Content),
+			@ApiResponse(responseCode = "406", description = "Datos incorrectos", content = @Content), 
+			@ApiResponse(responseCode = "417", description = "Saldo insuficiente", content = @Content),
+			@ApiResponse(responseCode = "451", description = "Aforo completo", content = @Content)}) 
 	@GetMapping(value = "/aforoTotal/{aforoTotal}/entradasVendidas/{entradasVendidas}/precio/{precio}")
 	public MensajePago verificaPago(@PathVariable int aforoTotal, @PathVariable int entradasVendidas, @PathVariable float precio) {
 		return pagoService.generaMensajeDePago(aforoTotal, entradasVendidas, precio, RandomTarjeta.creaTarjeta());

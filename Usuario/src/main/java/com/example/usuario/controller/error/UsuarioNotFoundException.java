@@ -7,6 +7,10 @@ public class UsuarioNotFoundException extends RuntimeException {
 	public UsuarioNotFoundException() {
 		super("Epic Fail: No existe el usuario");
 	}
+	
+	public UsuarioNotFoundException(String mensaje) {
+		super(mensaje);
+	}
 
 	public UsuarioNotFoundException(Long id) {
 		super("Epic Fail: No existe el usuario " + id);
