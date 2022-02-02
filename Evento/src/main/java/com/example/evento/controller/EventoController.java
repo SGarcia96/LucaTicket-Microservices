@@ -144,4 +144,19 @@ public class EventoController {
 		return body;
 	}
 
+	@Operation(summary = "Buscar eventos por ciudad", description = "Dado una ciudad, devuelve uno o varios objetos Evento", tags = {
+			"evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Evento encontrado en la ciudad", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
+			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado en la ciudad (NO implementado)", content = @Content) })
+	@GetMapping("findAllByCiudad/{ciudad}")
+	public List<Evento> findAllByLugar(
+			@Parameter(description = "Nombre de la ciudad donde buscar evento", required = true) @PathVariable("ciudad") String lugar) {
+		log.info("--- eventos por ciudad " + lugar);
+		final List<Evento> eventos = eventoService.findAllByLugar(lugar);
+		return eventos;
+	}
+
 }

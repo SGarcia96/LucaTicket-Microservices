@@ -162,5 +162,18 @@ public class EventoControllerTest {
 			.body("size()", greaterThan(0))
 			.body("id[0]", equalTo("61f142e9be1b54605e3893d0"));
 	}
+	
+	// GET /eventos/findAllByLugar{lugar}
+		@Test
+		public void shouldGetEventoByLugarWithStatus200() {
+			when()
+				.get("/findAllByLugar/cadi")
+			.then()
+				.statusCode(200)
+				.assertThat()
+				.body("size()", greaterThan(0))
+				.body("id[0]", equalTo("61f142e9be1b54605e3893d0"));
+		}
+		
 
 }
