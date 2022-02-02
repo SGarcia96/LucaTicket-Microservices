@@ -85,9 +85,23 @@ public class UsuarioControllerTests {
 		given()
 			.contentType("application/json")
 		.when()
-			.post("/login?usuario=andrea@gmail.com&password=andrea123")
+			.post("/login?usuario=eva@gmail.com&password=eva123")
 		.then()
 			.statusCode(200);
+	}
+	
+	@Test
+	public void shouldGetUsuarioByIdWithStatus200(){
+		String token = given()
+			.contentType("application/json")
+		.when()
+			.post("/login?usuario=eva@gmail.com&password=eva123").asString();
+		
+		given()
+			.header("Authorization", token)
+			.get("/1")
+		.then()
+			.body("apellido", equalTo("montiel"));
 	}
 }
 
