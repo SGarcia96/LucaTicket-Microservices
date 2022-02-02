@@ -68,6 +68,7 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public void deleteById(String id) {
+		findById(id);
 		eventoRepository.deleteById(id);
 	}
 
