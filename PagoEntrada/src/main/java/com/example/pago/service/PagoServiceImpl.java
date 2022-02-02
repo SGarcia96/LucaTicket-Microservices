@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.pago.model.MensajePago;
 import com.example.pago.model.Tarjeta;
-import com.example.pago.utils.RandomNumber;
-import com.example.pago.utils.RandomTarjeta;
 
 @Service
 public class PagoServiceImpl implements PagoService {

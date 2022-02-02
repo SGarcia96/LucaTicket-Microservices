@@ -74,5 +74,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		return "Bearer " + token;
 	}
+	
+	@Override
+	public UsuarioDTO findById(Long id) {
+		return usuarioAdapter.of(usuarioRepository.findById(id).orElseThrow(UsuarioNotFoundException::new));
+	}
 
 }

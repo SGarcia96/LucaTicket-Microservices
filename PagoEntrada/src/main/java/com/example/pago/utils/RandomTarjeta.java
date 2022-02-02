@@ -2,7 +2,6 @@ package com.example.pago.utils;
 
 import java.time.LocalDate;
 
-import com.example.pago.model.MensajePago;
 import com.example.pago.model.Tarjeta;
 
 public class RandomTarjeta {

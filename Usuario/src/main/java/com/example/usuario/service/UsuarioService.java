@@ -14,5 +14,7 @@ public interface UsuarioService {
 	public UsuarioDTO findByMail(String mail);
 
 	public String getJWTToken(UsuarioDTO usuario);
+	
+	public UsuarioDTO findById (Long id);
 
 }
