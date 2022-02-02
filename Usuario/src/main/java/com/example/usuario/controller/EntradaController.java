@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.usuario.feignclients.PagoFeignClient;
 import com.example.usuario.model.Entrada;
 import com.example.usuario.model.MensajePago;
 import com.example.usuario.service.EntradaService;

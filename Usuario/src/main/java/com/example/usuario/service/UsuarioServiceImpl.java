@@ -75,4 +75,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return "Bearer " + token;
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		usuarioRepository.deleteById(id);
+	}
+
 }
