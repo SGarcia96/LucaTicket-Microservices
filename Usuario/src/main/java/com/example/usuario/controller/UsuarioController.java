@@ -93,8 +93,8 @@ public class UsuarioController {
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (ID no existe)", content = @Content) })
 	@PutMapping("/{id}")
 	public ResponseEntity<UsuarioDTO> updateEvento(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
-		usuariosService.findById(id);
-		UsuarioDTO newUsuario = usuariosService.save(usuario);
+		
+		UsuarioDTO newUsuario = usuariosService.update(id,usuario);
 		return new ResponseEntity<>(newUsuario, HttpStatus.OK);
 	}
 
