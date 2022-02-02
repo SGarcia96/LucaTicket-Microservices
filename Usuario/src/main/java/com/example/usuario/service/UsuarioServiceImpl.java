@@ -77,6 +77,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public void deleteById(Long id) {
+		if (!usuarioRepository.findById(id).isPresent()) throw new UsuarioNotFoundException();
 		usuarioRepository.deleteById(id);
 	}
 

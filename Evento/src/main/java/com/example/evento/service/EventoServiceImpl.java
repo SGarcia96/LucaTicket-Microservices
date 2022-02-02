@@ -65,6 +65,8 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public void deleteById(String id) {
+		if (!eventoRepository.findById(id).isPresent())
+			throw new EventoNotFoundException();
 		eventoRepository.deleteById(id);
 	}
 
