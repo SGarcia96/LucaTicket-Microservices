@@ -15,6 +15,8 @@ public interface UsuarioService {
 
 	public String getJWTToken(UsuarioDTO usuario);
 	
+	public UsuarioDTO findById (Long id);
+
 	public void deleteById(Long id);
 
 }
