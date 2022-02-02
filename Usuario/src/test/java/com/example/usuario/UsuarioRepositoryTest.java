@@ -43,6 +43,22 @@ public class UsuarioRepositoryTest {
 			.contains("nombre");
 	}
 	
+	@Test
+	void shouldDeleteTheUserCorrectlyWhenUserExists() {
+		Usuario usuario = new Usuario();
+		
+		usuario.setId(50);
+		usuario.setNombre("nombre");
+		usuario.setApellido("apellido");
+		usuario.setMail("mail@gmail.com");
+		usuario.setPassword("password");
+		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
+		usuarioRepository.save(usuario);
+		usuarioRepository.deleteById((long) 50);
+		
+		assertThat(usuarioRepository.findByMail("mail@gmail.com").isEmpty());
+	}
+	
 	
 	
 
