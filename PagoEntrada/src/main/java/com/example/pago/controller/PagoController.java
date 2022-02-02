@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.pago.model.MensajePago;
 import com.example.pago.service.PagoService;
+import com.example.pago.utils.RandomTarjeta;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -56,9 +58,8 @@ public class PagoController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = MensajePago.class)) }),
 			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Pago no encontrado", content = @Content) })
-	@PostMapping(value = "/aforoTotal/{aforoTotal}/entradasVendidas/{entradasVendidas}/precio/{precio}")
-	public ResponseEntity<?> verificaPago(@PathVariable int aforoTotal, @PathVariable int entradasVendidas, @PathVariable float precio) {
-		MensajePago mensaje = pagoService.generaMensajeDePago(aforoTotal, entradasVendidas, precio);
-		return new ResponseEntity<>(mensaje.getMensaje(), mensaje.getCodigo());
+	@GetMapping(value = "/aforoTotal/{aforoTotal}/entradasVendidas/{entradasVendidas}/precio/{precio}")
+	public MensajePago verificaPago(@PathVariable int aforoTotal, @PathVariable int entradasVendidas, @PathVariable float precio) {
+		return pagoService.generaMensajeDePago(aforoTotal, entradasVendidas, precio, RandomTarjeta.creaTarjeta());
 	}
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.usuario.feignclients.PagoFeignClient;
 import com.example.usuario.model.Entrada;
+import com.example.usuario.model.MensajePago;
 import com.example.usuario.service.EntradaService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,7 +55,8 @@ public class EntradaController {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = Entrada.class)) }) })
 	@PostMapping("/{id}/add")
 	public ResponseEntity<?> addEntrada2(@PathVariable("id") Long id, @RequestParam String idEvento) {
-		return entradaService.addEntrada(id, idEvento);
+		MensajePago mensajePago = entradaService.addEntrada(id, idEvento);
+		return new ResponseEntity<>(mensajePago.getMensaje(), mensajePago.getCodigo());
 	}
 
 }
