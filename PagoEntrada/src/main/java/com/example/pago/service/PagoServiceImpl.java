@@ -14,8 +14,7 @@ import com.example.pago.utils.RandomTarjeta;
 public class PagoServiceImpl implements PagoService {
 	
 	@Override
-	public MensajePago generaMensajeDePago(int aforoTotal, int entradasVendidas, float precio) {
-		Tarjeta tarjeta = RandomTarjeta.creaTarjeta();
+	public MensajePago generaMensajeDePago(int aforoTotal, int entradasVendidas, float precio, Tarjeta tarjeta) {
 		
 		if(aforoTotal <= entradasVendidas) {
 			return new MensajePago("aforo completo", HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS);
