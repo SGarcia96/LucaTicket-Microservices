@@ -2,7 +2,6 @@ package com.example.evento.service;
 
 import java.util.List;
 import com.example.evento.model.Evento;
-import com.example.evento.model.EventoDTO;
 
 public interface EventoService {
 	

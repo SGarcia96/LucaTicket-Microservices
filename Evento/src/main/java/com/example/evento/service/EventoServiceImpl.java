@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.evento.adapter.EventoAdapter;
 import com.example.evento.controller.error.EventoNotFoundException;
 import com.example.evento.model.Evento;
-import com.example.evento.model.EventoDTO;
 import com.example.evento.repository.EventoRepository;
 
 @Service
@@ -50,7 +48,6 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public Evento update(String id, Evento evento) {
-
 		Evento newEvento = eventoRepository.findById(id).orElseThrow(EventoNotFoundException::new);
 		newEvento.setNombre(evento.getNombre());
 		newEvento.setDescripcionCorta(evento.getDescripcionCorta());
@@ -68,7 +65,8 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public void deleteById(String id) {
-		findById(id);
+		if (!eventoRepository.findById(id).isPresent())
+			throw new EventoNotFoundException();
 		eventoRepository.deleteById(id);
 	}
 

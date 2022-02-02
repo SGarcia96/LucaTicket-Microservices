@@ -74,5 +74,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		return "Bearer " + token;
 	}
+	
+	@Override
+	public UsuarioDTO findById(Long id) {
+		return usuarioAdapter.of(usuarioRepository.findById(id).orElseThrow(UsuarioNotFoundException::new));
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		if (!usuarioRepository.findById(id).isPresent()) throw new UsuarioNotFoundException();
+		usuarioRepository.deleteById(id);
+	}
 
 }
