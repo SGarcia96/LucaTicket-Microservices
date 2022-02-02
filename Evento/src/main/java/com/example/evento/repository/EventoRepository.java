@@ -14,4 +14,6 @@ public interface EventoRepository extends MongoRepository<Evento, String> {
 
 	public List<Evento> findByNombre(String nombre);
 
+	public List<Evento> findAllByRecintoLugar(String lugar);
+
 }

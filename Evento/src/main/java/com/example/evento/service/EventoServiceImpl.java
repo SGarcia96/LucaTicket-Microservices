@@ -80,4 +80,9 @@ public class EventoServiceImpl implements EventoService {
 	public List<Evento> findAllByNombre(String nombre) {
 		return eventoRepository.findByNombre(nombre);
 	}
+	
+	@Override
+	public List<Evento> findAllByLugar(String lugar) {
+		return eventoRepository.findAllByRecintoLugar(lugar);
+	}
 }

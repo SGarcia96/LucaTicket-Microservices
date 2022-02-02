@@ -19,6 +19,8 @@ public interface EventoService {
 	public List<Evento> findAllByGenero(String genero);
 
 	public List<Evento> findAllByNombre(String nombre);
+	
+	public List<Evento> findAllByLugar(String lugar);
 
 
 }
