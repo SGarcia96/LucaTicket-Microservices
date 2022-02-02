@@ -1,6 +1,10 @@
 package com.example.evento.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -132,10 +136,15 @@ public class EventoController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado (ID no existe)", content = @Content) })
 	@DeleteMapping("/{id}")
-	public void deleteEvento(
+	public Map<String, Object> deleteEvento(
 			@Parameter(description = "ID del evento a localizar", required = true) @PathVariable("id") String id) {
 		log.info("--- deleteEvento con id " + id);
 		eventoService.deleteById(id);
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("timestamp", new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
+		body.put("message", "Evento eliminado con éxito");
+		body.put("status", 200);
+		return body;
 	}
 
 }

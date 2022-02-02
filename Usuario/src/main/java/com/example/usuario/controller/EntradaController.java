@@ -1,6 +1,10 @@
 package com.example.usuario.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.usuario.feignclients.EventoFeignClient;
+
 import com.example.usuario.model.Entrada;
+import com.example.usuario.model.EventoDTO;
 import com.example.usuario.model.MensajePago;
 import com.example.usuario.service.EntradaService;
 
@@ -33,6 +40,9 @@ public class EntradaController {
 
 	@Autowired
 	private EntradaService entradaService;
+	
+	@Autowired
+	private EventoFeignClient eventoFeign;
 
 	@Operation(summary = "Buscar todas las entradas", description = "", tags = { "entrada" })
 	@ApiResponses(value = {
@@ -55,7 +65,16 @@ public class EntradaController {
 	@PostMapping("/{id}/add")
 	public ResponseEntity<?> addEntrada2(@PathVariable("id") Long id, @RequestParam String idEvento) {
 		MensajePago mensajePago = entradaService.addEntrada(id, idEvento);
-		return new ResponseEntity<>(mensajePago.getMensaje(), mensajePago.getCodigo());
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("timestamp", new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
+		body.put("message", mensajePago.getMensaje());
+		body.put("status", mensajePago.getCodigo().value());
+		if(mensajePago.getCodigo().value() == 200) {
+			EventoDTO evento = eventoFeign.getEvento(idEvento);
+			body.put("evento", evento);
+		}
+		
+		return new ResponseEntity<>(body, mensajePago.getCodigo());
 	}
 
 }
