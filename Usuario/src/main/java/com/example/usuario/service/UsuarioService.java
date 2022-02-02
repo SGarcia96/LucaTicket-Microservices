@@ -12,7 +12,13 @@ public interface UsuarioService {
 	public List<UsuarioDTO> findAll();
 
 	public UsuarioDTO findByMail(String mail);
+	
+	public UsuarioDTO update(Long id, Usuario usuario);
 
 	public String getJWTToken(UsuarioDTO usuario);
+	
+	public UsuarioDTO findById (Long id);
+
+	public void deleteById(Long id);
 
 }

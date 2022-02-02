@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import com.example.usuario.adapter.UsuarioAdapter;
 import com.example.usuario.controller.error.UsuarioNotFoundException;
 import com.example.usuario.dto.UsuarioDTO;
@@ -74,5 +75,36 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		return "Bearer " + token;
 	}
+	
+	@Override
+	public UsuarioDTO findById(Long id) {
+		return usuarioAdapter.of(usuarioRepository.findById(id).orElseThrow(UsuarioNotFoundException::new));
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		if (!usuarioRepository.findById(id).isPresent()) throw new UsuarioNotFoundException();
+		usuarioRepository.deleteById(id);
+	}
+	public UsuarioDTO update(Usuario usuario) {
+		Usuario newUsuario = usuarioRepository.findById(usuario.getId()).orElseThrow(UsuarioNotFoundException::new);
+		newUsuario.setNombre(usuario.getNombre());
+		newUsuario.setApellido(usuario.getApellido());
+		newUsuario.setMail(usuario.getMail());
+		newUsuario.setPassword(usuario.getPassword());
+		newUsuario.setFechaAlta(usuario.getFechaAlta());
+		return this.save(newUsuario);
+	}
+
+	public UsuarioDTO update(Long id,Usuario usuario) {
+		Usuario newUsuario = usuarioRepository.findById(id).orElseThrow(UsuarioNotFoundException::new);
+		newUsuario.setNombre(usuario.getNombre());
+		newUsuario.setApellido(usuario.getApellido());
+		newUsuario.setMail(usuario.getMail());
+		newUsuario.setPassword(usuario.getPassword());
+		newUsuario.setFechaAlta(usuario.getFechaAlta());
+		return this.save(newUsuario);
+	}
+
 
 }
