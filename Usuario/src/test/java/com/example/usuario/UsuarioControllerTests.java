@@ -5,27 +5,17 @@ import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 
-import org.apache.coyote.Adapter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import com.example.usuario.adapter.UsuarioAdapter;
-import com.example.usuario.controller.IncorrectPasswordException;
-import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Usuario;
-import com.example.usuario.service.UsuarioService;
 
 @ActiveProfiles("dev")
 public class UsuarioControllerTests {

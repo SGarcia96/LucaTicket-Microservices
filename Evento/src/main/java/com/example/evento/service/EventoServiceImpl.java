@@ -94,6 +94,10 @@ public class EventoServiceImpl implements EventoService {
 	
 	@Override
 	public List<Evento> findAllByLugar(String lugar) {
-		return eventoRepository.findAllByRecintoLugar(lugar);
+		final List<Evento> lista = eventoRepository.findAllByRecintoLugar(lugar);
+		if (lista.isEmpty()) {
+			throw new EventoNotFoundException("No se encontró ningún evento en " + lugar);
+		}
+		return lista;
 	}
 }
