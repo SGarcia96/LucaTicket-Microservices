@@ -48,10 +48,7 @@ public class UsuarioController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
-
-	
 	@GetMapping("/{id}")
 	public UsuarioDTO getUsuario(
 			@Parameter(description = "ID del usuario a localizar", required = true) @PathVariable("id") Long id) {
@@ -64,7 +61,7 @@ public class UsuarioController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuarios localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
+			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Usuarios no encontrados (NO implementados)", content = @Content) })
 	@GetMapping
 	public List<UsuarioDTO> getAllUsuarios() {
