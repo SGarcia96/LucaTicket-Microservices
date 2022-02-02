@@ -17,4 +17,6 @@ public interface UsuarioService {
 	
 	public UsuarioDTO findById (Long id);
 
+	public void deleteById(Long id);
+
 }

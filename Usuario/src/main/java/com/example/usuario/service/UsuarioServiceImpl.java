@@ -80,4 +80,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioAdapter.of(usuarioRepository.findById(id).orElseThrow(UsuarioNotFoundException::new));
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		usuarioRepository.deleteById(id);
+	}
+
 }

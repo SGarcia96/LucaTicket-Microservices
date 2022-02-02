@@ -3,8 +3,6 @@ package com.example.usuario.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.example.usuario.feignclients.EventoFeignClient;
