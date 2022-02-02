@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,11 +79,26 @@ public class UsuarioController {
 		return new ResponseEntity<>(usuariosService.save(usuario), HttpStatus.CREATED);
 	}
 
+	@Operation(summary = "Editar un Usuario", description = "Dado el ID de un usuario y sus campos modificados, actualiza el usuario",
+			tags = { "evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario modificado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
+			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (ID no existe)", content = @Content) })
+	@PutMapping("/{id}")
+	public ResponseEntity<UsuarioDTO> updateEvento(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
+		usuariosService.findById(id);
+		UsuarioDTO newUsuario = usuariosService.save(usuario);
+		return new ResponseEntity<>(newUsuario, HttpStatus.OK);
+	}
+
 	@Operation(summary = "Login", description = "Permite a un usuario loguearse", tags = { "usuario" })
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario y contraseña correctos", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
-	@ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content),
-	@ApiResponse(responseCode = "400", description = "Contraseña incorrecta ", content = @Content)})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario y contraseña correctos", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content),
+			@ApiResponse(responseCode = "400", description = "Contraseña incorrecta ", content = @Content) })
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestParam("usuario") String usuario, @RequestParam("password") String pwd) {
 
