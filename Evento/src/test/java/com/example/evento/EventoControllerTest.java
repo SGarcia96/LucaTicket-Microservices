@@ -138,6 +138,18 @@ public class EventoControllerTest {
 			.body("size()", greaterThan(0))
 			.body("genero[0]", equalTo("rock"));
 	}
+	
+	// GET /eventos/findAllByGenero/{genero}
+		@Test
+		public void shouldGetEventoByGeneroWithStatus404() {
+			when()
+				.get("findAllByGenero/rack")
+				.then()
+				.statusCode(404)
+				.assertThat()
+				.body("size()", equalTo(0))
+				.body("genero[0]", equalTo(null));
+		}
 
 	// GET /eventos/findAllByNombre{nombre}
 	@Test

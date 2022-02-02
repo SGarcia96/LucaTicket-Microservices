@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.usuario.controller.error.IncorrectPasswordException;
 import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Usuario;
 import com.example.usuario.service.UsuarioService;
@@ -48,10 +49,7 @@ public class UsuarioController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
-
-	
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content) })
 	@GetMapping("/{id}")
 	public UsuarioDTO getUsuario(
 			@Parameter(description = "ID del usuario a localizar", required = true) @PathVariable("id") Long id) {
@@ -64,8 +62,7 @@ public class UsuarioController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuarios localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Usuarios no encontrados (NO implementados)", content = @Content) })
+			@ApiResponse(responseCode = "404", description = "Usuarios no encontrados", content = @Content) })
 	@GetMapping
 	public List<UsuarioDTO> getAllUsuarios() {
 		log.info("--- todos los eventos");
@@ -77,7 +74,8 @@ public class UsuarioController {
 	@Operation(summary = "Añade un nuevo Usuario", description = "Añade un usuario a la base de datos", tags = {
 			"usuario" })
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Usuario añadido", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }) })
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }), 
+	@ApiResponse(responseCode = "400", description = "Valores incorrectos", content = @Content)})
 	@PostMapping
 	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario) {
 		log.info("--- add usuario: " + usuario);

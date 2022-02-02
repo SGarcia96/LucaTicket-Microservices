@@ -22,7 +22,11 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public List<Evento> findAll() {
-		return eventoRepository.findAll();
+		final List<Evento> lista = eventoRepository.findAll();
+		if (lista.isEmpty()) {
+			throw new EventoNotFoundException("La lista de eventos se encuentra vacia");
+		}
+		return lista;
 	}
 
 	@Override
@@ -72,11 +76,19 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public List<Evento> findAllByGenero(String genero) {
+		final List<Evento> lista = eventoRepository.findAllByGenero(genero);
+		if (lista.isEmpty()) {
+			throw new EventoNotFoundException("No hay eventos disponibles del género " + genero);
+		}
 		return eventoRepository.findAllByGenero(genero);
 	}
 
 	@Override
 	public List<Evento> findAllByNombre(String nombre) {
+		final List<Evento> lista = eventoRepository.findByNombre(nombre);
+		if (lista.isEmpty()) {
+			throw new EventoNotFoundException("No hay eventos con el nombre " + nombre);
+		}
 		return eventoRepository.findByNombre(nombre);
 	}
 }

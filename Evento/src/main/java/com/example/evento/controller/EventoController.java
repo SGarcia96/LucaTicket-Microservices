@@ -52,8 +52,7 @@ public class EventoController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
+			@ApiResponse(responseCode = "404", description = "La lista de eventos se encuentra vacia", content = @Content) })
 	@GetMapping
 	public List<Evento> getAllEventos() {
 		log.info("--- todos los eventos");
@@ -80,8 +79,7 @@ public class EventoController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Eventos no encontrados (NO implementados)", content = @Content) })
+			@ApiResponse(responseCode = "404", description = "Eventos de ese género no encontrados)", content = @Content) })
 	@GetMapping("findAllByGenero/{genero}")
 	public List<Evento> getAllEventosByGenero(
 			@Parameter(description = "Género del evento a localizar", required = true) @PathVariable("genero") String genero) {
@@ -95,8 +93,7 @@ public class EventoController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Eventos localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Evento.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Evento no encontrado (NO implementado)", content = @Content) })
+			@ApiResponse(responseCode = "404", description = "Evento no encontrado con ese nombre", content = @Content) })
 	@GetMapping("findAllByNombre/{nombre}")
 	public List<Evento> findAllByNombre(
 			@Parameter(description = "Nombre del evento a localizar", required = true) @PathVariable("nombre") String nombre) {
