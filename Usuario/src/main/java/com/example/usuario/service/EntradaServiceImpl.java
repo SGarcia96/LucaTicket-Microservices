@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.usuario.controller.error.EntradaNotFoundException;
 import com.example.usuario.feignclients.EventoFeignClient;
 import com.example.usuario.feignclients.PagoFeignClient;
 import com.example.usuario.model.Entrada;
@@ -52,7 +53,11 @@ public class EntradaServiceImpl implements EntradaService {
 
 	@Override
 	public List<Entrada> findAll() {
-		return entradaRepository.findAll();
+		final List<Entrada> lista = entradaRepository.findAll();
+		if (lista.isEmpty()) {
+			throw new EntradaNotFoundException("No se ha vendido ninguna entrada aún");
+		}
+		return lista;
 	}
 
 }

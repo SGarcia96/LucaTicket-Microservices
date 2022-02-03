@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.usuario.controller.error.IncorrectPasswordException;
 import com.example.usuario.dto.UsuarioDTO;
 import com.example.usuario.model.Usuario;
 import com.example.usuario.service.UsuarioService;
@@ -47,10 +49,7 @@ public class UsuarioController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuario localizado", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válido (NO implementado) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (NO implementado)", content = @Content) })
-
-	
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content) })
 	@GetMapping("/{id}")
 	public UsuarioDTO getUsuario(
 			@Parameter(description = "ID del usuario a localizar", required = true) @PathVariable("id") Long id) {
@@ -63,8 +62,7 @@ public class UsuarioController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Usuarios localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidos (NO implementados) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Usuarios no encontrados (NO implementados)", content = @Content) })
+			@ApiResponse(responseCode = "404", description = "Usuarios no encontrados", content = @Content) })
 	@GetMapping
 	public List<UsuarioDTO> getAllUsuarios() {
 		log.info("--- todos los eventos");
@@ -76,11 +74,26 @@ public class UsuarioController {
 	@Operation(summary = "Añade un nuevo Usuario", description = "Añade un usuario a la base de datos", tags = {
 			"usuario" })
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Usuario añadido", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }) })
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }), 
+	@ApiResponse(responseCode = "400", description = "Valores incorrectos", content = @Content)})
 	@PostMapping
 	public ResponseEntity<?> addUsuario(@Valid @RequestBody Usuario usuario) {
 		log.info("--- add usuario: " + usuario);
 		return new ResponseEntity<>(usuariosService.save(usuario), HttpStatus.CREATED);
+	}
+
+	@Operation(summary = "Editar un Usuario", description = "Dado el ID de un usuario y sus campos modificados, actualiza el usuario",
+			tags = { "evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Usuario modificado", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class)) }),
+			@ApiResponse(responseCode = "400", description = "BAD_REQUEST, algún campo no es correcto", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Usuario no encontrado (ID no existe)", content = @Content) })
+	@PutMapping("/{id}")
+	public ResponseEntity<UsuarioDTO> updateEvento(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
+		
+		UsuarioDTO newUsuario = usuariosService.update(id,usuario);
+		return new ResponseEntity<>(newUsuario, HttpStatus.OK);
 	}
 
 	@Operation(summary = "Login", description = "Permite a un usuario loguearse", tags = { "usuario" })

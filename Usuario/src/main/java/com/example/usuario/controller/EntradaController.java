@@ -48,8 +48,7 @@ public class EntradaController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Entradas localizados", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = Entrada.class)) }),
-			@ApiResponse(responseCode = "400", description = "No válidas (NO implementadas) ", content = @Content),
-			@ApiResponse(responseCode = "404", description = "Entradas no encontradas (NO implementadas)", content = @Content) })
+			@ApiResponse(responseCode = "404", description = "Entradas no encontradas", content = @Content) })
 	@GetMapping
 	public List<Entrada> getAllEntrada() {
 		log.info("--- todos los entradas");
@@ -61,7 +60,11 @@ public class EntradaController {
 	@Operation(summary = "Añade una nueva Entrada", description = "Añade una entrada a la base de datos", tags = {
 			"entrada" })
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Entrada añadida", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = Entrada.class)) }) })
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Entrada.class)) }),
+	@ApiResponse(responseCode = "406", description = "Tarjeta caducada", content = @Content),
+	@ApiResponse(responseCode = "406", description = "Datos incorrectos", content = @Content), 
+	@ApiResponse(responseCode = "417", description = "Saldo insuficiente", content = @Content),
+	@ApiResponse(responseCode = "451", description = "Aforo completo", content = @Content)}) 
 	@PostMapping("/{id}/add")
 	public ResponseEntity<?> addEntrada2(@PathVariable("id") Long id, @RequestParam String idEvento) {
 		MensajePago mensajePago = entradaService.addEntrada(id, idEvento);

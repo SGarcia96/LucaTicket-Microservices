@@ -8,8 +8,8 @@ public class EventoNotFoundException extends RuntimeException {
 		super("Epic Fail: No existe el evento");
 	}
 
-	public EventoNotFoundException(String id) {
-		super("Epic Fail: No existe el evento " + id);
+	public EventoNotFoundException(String mensaje) {
+		super(mensaje);
 	}
 
 }
