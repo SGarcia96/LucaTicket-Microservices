@@ -13,7 +13,6 @@ public class PagoServiceImpl implements PagoService {
 
 	@Override
 	public MensajePago generaMensajeDePago(int aforoTotal, int entradasVendidas, float precio, Tarjeta tarjeta) {
-
 		if (aforoTotal <= entradasVendidas) {
 			return new MensajePago("aforo completo", HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS);
 		} else if (tarjeta.getFecha().isBefore(LocalDate.now())) {
@@ -27,4 +26,5 @@ public class PagoServiceImpl implements PagoService {
 			return new MensajePago("Pago efectuado con éxito", HttpStatus.OK);
 		}
 	}
+
 }

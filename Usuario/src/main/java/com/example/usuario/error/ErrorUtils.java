@@ -10,12 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-//Dado el resultado de una validación lo convierte a un JSn tipo String para que pueda ir en el mensaje de vuelta
-//y pueda ser facilmente leido
 public class ErrorUtils {
 	
     public static String formatMessage( BindingResult result){
-    	//recoge todos los errores generados
         List<Map<String,String>> errors = result.getFieldErrors().stream()
                 .map(err ->{
                     Map<String,String>  error =  new HashMap<>();
@@ -26,7 +23,6 @@ public class ErrorUtils {
         
         ErrorMessage errorMessage = new ErrorMessage("01",errors);
         
-        //Lo convierto este objeto a JSOnString
         ObjectMapper mapper = new ObjectMapper();
         String jsonString="";
         try {

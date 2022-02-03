@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-// CLASE SIMILAR A LA DE ERRORES PERO CON CAMBIOS EN FECHA Y CAMPO AÑADIDO
 public class CustomErrorJson {
 
-	// Modificado. Originalmente era una fecha
 	private String timestamp;
 	private int status;
 	private String error;
@@ -32,7 +30,6 @@ public class CustomErrorJson {
 	public CustomErrorJson(Date timestamp, int status, String error, String trace, List<String> message, String path,
 			String jdk) {
 		super();
-		// Formato DD/MM/YY
 		this.timestamp = this.changeTimeStamp(timestamp);
 		this.status = status;
 		this.error = error;
@@ -50,7 +47,6 @@ public class CustomErrorJson {
 		this.timestamp = timestamp;
 	}
 
-	// Variacion
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = this.changeTimeStamp(timestamp);
 	}

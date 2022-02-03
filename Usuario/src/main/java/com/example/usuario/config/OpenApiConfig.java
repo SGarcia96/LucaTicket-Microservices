@@ -20,4 +20,5 @@ public class OpenApiConfig {
                 .contact(new Contact().name("Grupo 3").email("lucatic_grupo03@gmail.es"))
                 .license(new License().name("LICENSE").url("http://springdoc.org")));
     }
+    
 }

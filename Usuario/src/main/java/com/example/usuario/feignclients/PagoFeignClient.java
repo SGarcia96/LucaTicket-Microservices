@@ -11,4 +11,5 @@ public interface PagoFeignClient {
 
 	@GetMapping(value = "/pago/aforoTotal/{aforoTotal}/entradasVendidas/{entradasVendidas}/precio/{precio}")
 	MensajePago verificaPago(@PathVariable int aforoTotal, @PathVariable int entradasVendidas, @PathVariable float precio);
+
 }

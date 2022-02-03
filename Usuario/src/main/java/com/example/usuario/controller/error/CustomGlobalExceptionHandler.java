@@ -26,34 +26,24 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	// Let Spring BasicErrorController handle the exception, we just override the
-	// status code
-	// Otra opción es hacerlo de forma individual, pero asi aglutinamos todos y
-	// podemos dar incluso distintos valores o acciones
-
-	// @ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(UsuarioNotFoundException.class)
 	public void springHandleUsuarioNotFound(HttpServletResponse response) throws IOException {
 		logger.info("------ UsuarioNotFoundException() ");
-		// Saltará a la clase CustomErrorAttibuttes para crear un error personalizado
 		response.sendError(HttpStatus.NOT_FOUND.value());
 	}
 	
 	@ExceptionHandler(EntradaNotFoundException.class)
 	public void springHandleEntradaNotFound(HttpServletResponse response) throws IOException {
 		logger.info("------ EntradaNotFoundException() ");
-		// Saltará a la clase CustomErrorAttibuttes para crear un error personalizado
 		response.sendError(HttpStatus.NOT_FOUND.value());
 	}
 
 	@ExceptionHandler(IncorrectPasswordException.class)
 	public void springHandleIncorrectPassword(HttpServletResponse response) throws IOException {
 		logger.info("------ IncorrectPasswordException() ");
-		// Saltará a la clase CustomErrorAttibuttes para crear un error personalizado
 		response.sendError(HttpStatus.BAD_REQUEST.value());
 	}
 
-	// @Validate For Validating Path Variables and Request Parameters
 	@ExceptionHandler(ConstraintViolationException.class)
 	public void constraintViolationException(HttpServletResponse response) throws IOException {
 		logger.info("------ ConstraintViolationException() ");
@@ -67,7 +57,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 	}
 
-	// error handle for @Valid
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -76,7 +65,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
 		CustomErrorJson customError = new CustomErrorJson();
 
-		// Paso fecha pero la formatea a String con formato DD/MM/YY
 		customError.setTimestamp(new Date());
 		// customError.setTrace(ex.getLocalizedMessage());
 		customError.setStatus(status.value());
@@ -99,10 +87,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
 	}
 
-	// A este método se llama cuando se haga una peticion no existente, por ejemplo,
-	// una URI de tipo GET que se haga con POST
-	// En este caso uso no uso la clase personalziada de errores para ver como se
-	// haría en ese caso
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -113,7 +97,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		ex.getSupportedHttpMethods().forEach(t -> builder.append(t + " "));
 
 		Map<String, Object> body = new LinkedHashMap<>();
-		// Paso fecha formateada a String
 		body.put("timestamp", new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
 		body.put("status", status.value());
 		body.put("error", ex.getLocalizedMessage());

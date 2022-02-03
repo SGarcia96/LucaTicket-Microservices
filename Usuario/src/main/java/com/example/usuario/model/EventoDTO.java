@@ -16,6 +16,4 @@ public class EventoDTO implements Serializable {
 	private int aforo;
 	private float precio;
 
-
-
 }

@@ -17,10 +17,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-
-				
-			
-
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/usuarios/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/usuarios").permitAll()
@@ -28,16 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/v3/**").permitAll()
 				.anyRequest().authenticated();
-
-
-		// Voy a dejar esto hasta que tengamos todos los métodos luego lo borramos
-		/*
-		 * .antMatchers(HttpMethod.GET, "/user/**").hasRole("USER")
-		 * .antMatchers(HttpMethod.POST, "/user").hasRole("ADMIN")
-		 * .antMatchers(HttpMethod.PUT, "/user/**").hasRole("ADMIN")
-		 * .antMatchers(HttpMethod.PATCH, "/user/**").hasRole("ADMIN")
-		 * .antMatchers(HttpMethod.DELETE, "/user/**").hasRole("ADMIN")
-		 * 
-		 */
 	}
+	
 }

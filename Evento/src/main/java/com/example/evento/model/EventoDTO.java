@@ -11,12 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class EventoDTO {
+	
 	@Id
 	private String id;
 	private String nombre;
 	private float precio;
 	private int aforo;
-	
-
 
 }

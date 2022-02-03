@@ -1,5 +1,14 @@
 package com.example.evento;
 
+import static io.restassured.RestAssured.basePath;
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -10,14 +19,6 @@ import org.springframework.test.context.ActiveProfiles;
 import com.example.evento.model.Evento;
 import com.example.evento.model.Recinto;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.mockito.ArgumentMatchers.contains;
-
-import java.time.LocalDate;
-
-/* Estos test solo funcionan si está levantado el server de Eureka */
 @ActiveProfiles("dev")
 public class EventoControllerTest {
 	
@@ -195,7 +196,6 @@ public class EventoControllerTest {
 			.body("size()", greaterThan(0));
 	}
 	
-	
 	// PUT /eventos/{id}
 	@Test
 	public void shouldUpdateEventoWithStatus200() {
@@ -223,28 +223,28 @@ public class EventoControllerTest {
 	}
 	
 	// PUT /eventos/{id}
-		@Test
-		public void shouldUpdateEventoWithStatus400() {
-			Evento evento = new Evento();
-			evento.setNombre("");
-			evento.setDescripcionCorta("dcorta");
-			evento.setDescripcionLarga("dlarga");
-			evento.setFotoUrl("m.jpg");
-			evento.setGenero("rock");
-			evento.setFechaEvento(LocalDate.now());
-			evento.setHoraEvento("20:00");
-			evento.setPoliticaAcceso("pacc");
-			evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
-			evento.setRecinto(new Recinto("a", "b", "c", 10));
-			
-			given()
-				.contentType("application/json")
-				.body(evento)	
-			.when()
-				.put("/abcdf1234")
-			.then()
-				.statusCode(400)
-				.body("nombre", equalTo(null));		
-		}
+	@Test
+	public void shouldUpdateEventoWithStatus400() {
+		Evento evento = new Evento();
+		evento.setNombre("");
+		evento.setDescripcionCorta("dcorta");
+		evento.setDescripcionLarga("dlarga");
+		evento.setFotoUrl("m.jpg");
+		evento.setGenero("rock");
+		evento.setFechaEvento(LocalDate.now());
+		evento.setHoraEvento("20:00");
+		evento.setPoliticaAcceso("pacc");
+		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
+		evento.setRecinto(new Recinto("a", "b", "c", 10));
+		
+		given()
+			.contentType("application/json")
+			.body(evento)	
+		.when()
+			.put("/abcdf1234")
+		.then()
+			.statusCode(400)
+			.body("nombre", equalTo(null));		
+	}
 	
 }

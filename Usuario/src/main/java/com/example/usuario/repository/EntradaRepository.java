@@ -15,4 +15,5 @@ public interface EntradaRepository extends JpaRepository<Entrada, Long> {
 	public Optional<Entrada> findOneByEvento(EventoDTO evento);
 
 	public List<Entrada> findAllByEventoNombre(String nombre);
+	
 }

@@ -51,4 +51,5 @@ public class Usuario {
 
 	@Column(name = "fecha_alta")
 	private LocalDate fechaAlta;
+	
 }

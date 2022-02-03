@@ -42,7 +42,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	// error handle for @Valid
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		HttpHeaders headers, HttpStatus status, WebRequest request) {
 
 		logger.info("------ handleMethodArgumentNotValid()");
 		CustomErrorJson customError = new CustomErrorJson();
@@ -53,15 +53,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		customError.setStatus(status.value());
 		customError.setError(status.name());
 
-		// Get all errors indicando el campo en el que falla
 		List<String> messages = new ArrayList<String>();
 		for (FieldError error : ex.getBindingResult().getFieldErrors()) {
 			messages.add(error.getField() + ": " + error.getDefaultMessage());
 		}
 		customError.setMessage(messages);
 
-		// Para recoger el path y simular de forma completa los datos originales
-		// request.getDescription(false) ---> uri=/eventos
 		String uri = request.getDescription(false);
 		uri = uri.substring(uri.lastIndexOf("=") + 1);
 		customError.setPath(uri);
@@ -69,13 +66,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		return new ResponseEntity<>(customError, headers, status);
 	}
 
-	// A este método se llama cuando se haga una peticion no existente, or ejemplo,
-	// una URI de tipo GET que se haga con POST
-	// En este caso uso no uso la clase personalziada de errores para ver como se
-	// haría en ese caso
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		HttpHeaders headers, HttpStatus status, WebRequest request) {
 		logger.info("------ handleHttpRequestMethodNotSupported()");
 		StringBuilder builder = new StringBuilder();
 		builder.append(ex.getMethod());
@@ -83,7 +76,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		ex.getSupportedHttpMethods().forEach(t -> builder.append(t + " "));
 
 		Map<String, Object> body = new LinkedHashMap<>();
-		// Paso fecha formateada a String
 		body.put("timestamp", new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
 		body.put("status", status.value());
 		body.put("error", ex.getLocalizedMessage());
@@ -91,4 +83,5 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
 		return new ResponseEntity<Object>(body, new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED);
 	}
+	
 }

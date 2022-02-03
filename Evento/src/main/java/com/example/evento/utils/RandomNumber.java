@@ -15,4 +15,5 @@ public class RandomNumber {
 
 		return Math.round((randomNumber * 100) / 100);
 	}
+	
 }

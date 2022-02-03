@@ -28,4 +28,5 @@ public class UsuarioAdapter {
 				.map(u -> of(u))
 				.collect(Collectors.toList());
 	}
+	
 }

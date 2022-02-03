@@ -20,7 +20,6 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
 	private static final Logger logger = LoggerFactory.getLogger(EventoController.class);
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-	// Para Spring Boot > 2.3
 	@Override
 	public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
 		logger.info("------ getErrorAttributes(): " + options);
@@ -39,9 +38,7 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
 		// Eliminamos la traza para simplificar la salida
 		errorAttributes.remove("trace");
 
-		// Insertamos nueva clave
-		errorAttributes.put("jdk", System.getProperty("java.version"));
-
 		return errorAttributes;
 	}
+	
 }

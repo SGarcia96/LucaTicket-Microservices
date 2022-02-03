@@ -21,5 +21,4 @@ public interface EventoService {
 	
 	public List<Evento> findAllByLugar(String lugar);
 
-
 }

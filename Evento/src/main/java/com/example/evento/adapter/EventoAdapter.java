@@ -27,5 +27,4 @@ public class EventoAdapter {
 				.collect(Collectors.toList());
 	}
 
-	
 }

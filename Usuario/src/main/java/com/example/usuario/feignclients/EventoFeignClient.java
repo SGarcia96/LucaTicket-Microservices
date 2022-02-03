@@ -11,4 +11,5 @@ public interface EventoFeignClient {
 
 	@GetMapping("{id}")
 	EventoDTO getEvento(@PathVariable String id);
+	
 }
