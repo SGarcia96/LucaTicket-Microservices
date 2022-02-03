@@ -1,6 +1,10 @@
 package com.example.usuario.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,13 +36,18 @@ public class EntradaServiceImpl implements EntradaService {
 	private PagoFeignClient pagoFeignClient;
 
 	@Override
-	public MensajePago addEntrada(Long idUsuario, String idEvento) {
+	public Map<String, Object> addEntrada(Long idUsuario, String idEvento) {
+		Map<String, Object> body = new LinkedHashMap<>();
 		final EventoDTO evento = eventoFeign.getEvento(idEvento);
-		MensajePago response = pagoFeignClient.verificaPago(evento.getAforo(), entradaRepository.findAllByEvento(evento).size(), evento.getPrecio());
-		if(response.getCodigo().value() == 200) {
-			saveEntrada(idUsuario, evento);	
+		MensajePago mensajePago = pagoFeignClient.verificaPago(evento.getAforo(), entradaRepository.findAllByEventoNombre(evento.getNombre()).size(), evento.getPrecio());
+		body.put("timestamp", new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
+		body.put("message", mensajePago.getMensaje());
+		body.put("status", mensajePago.getCodigo());
+		if(mensajePago.getCodigo().value() == 200) {
+			saveEntrada(idUsuario, evento);
+			body.put("evento", evento);
 		}
-		return response;
+		return body;
 	}
 
 	@Override

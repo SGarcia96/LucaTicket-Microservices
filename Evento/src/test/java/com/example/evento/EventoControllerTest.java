@@ -13,6 +13,7 @@ import com.example.evento.model.Recinto;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.mockito.ArgumentMatchers.contains;
 
 import java.time.LocalDate;
 
@@ -90,8 +91,8 @@ public class EventoControllerTest {
 		.then()
 			.statusCode(400)
 			.body("error", equalTo("BAD_REQUEST"))
-		//	.body("message[0]", equalTo("nombre: no debe estar vacío"));
-			.body("message[1]", equalTo("nombre: el tamaño debe estar entre 3 y 30"));
+			.body("message[0]", equalTo("nombre: no debe estar vacío"));
+		//	.body("message[1]", equalTo("nombre: el tamaño debe estar entre 3 y 30"));
 	}
 	
 	// GET /eventos/{id}
@@ -103,7 +104,7 @@ public class EventoControllerTest {
 			.statusCode(200)
 			.assertThat()
 			.body("size()", greaterThan(0))
-			.body("nombre", equalTo("eventito"));
+			.body("nombre", equalTo("eventitoUpdate2"));
 	}
 	
 	// GET /eventos/{id}
@@ -127,6 +128,15 @@ public class EventoControllerTest {
 			.statusCode(200);
 	}
 	
+	// DELETE /eventos/{id}
+	@Test
+	public void shouldReturnStatus404NotFound() {
+		when()
+			.delete("/abcdfghi111111111")
+		.then()
+			.statusCode(404);
+	}
+	
 	// GET /eventos/findAllByGenero/{genero}
 	@Test
 	public void shouldGetEventoByGeneroWithStatus200() {
@@ -140,16 +150,15 @@ public class EventoControllerTest {
 	}
 	
 	// GET /eventos/findAllByGenero/{genero}
-		@Test
-		public void shouldGetEventoByGeneroWithStatus404() {
-			when()
-				.get("findAllByGenero/rack")
-				.then()
-				.statusCode(404)
-				.assertThat()
-				.body("size()", equalTo(0))
-				.body("genero[0]", equalTo(null));
-		}
+	@Test
+	public void shouldGetEventoByGeneroWithStatus404() {
+		when()
+			.get("findAllByGenero/rack")
+			.then()
+			.statusCode(404)
+			.assertThat()
+			.body("error", equalTo("Not Found"));
+	}
 
 	// GET /eventos/findAllByNombre{nombre}
 	@Test
@@ -164,16 +173,78 @@ public class EventoControllerTest {
 	}
 	
 	// GET /eventos/findAllByLugar{lugar}
-		@Test
-		public void shouldGetEventoByLugarWithStatus200() {
-			when()
-				.get("/findAllByLugar/cadi")
-			.then()
-				.statusCode(200)
-				.assertThat()
-				.body("size()", greaterThan(0))
-				.body("id[0]", equalTo("61f142e9be1b54605e3893d0"));
-		}
+	@Test
+	public void shouldGetEventoByLugarWithStatus200() {
+		when()
+			.get("/findAllByCiudad/cadi")
+		.then()
+			.statusCode(200)
+			.assertThat()
+			.body("size()", greaterThan(0))
+			.body("recinto[0].lugar", equalTo("cadi"));
+	}
+	
+	// GET /eventos/findAllByLugar{lugar}
+	@Test
+	public void shouldGetEventoByLugarWithStatus404() {
+		when()
+			.get("/findAllByCiudad/abcdef")
+		.then()
+			.statusCode(404)
+			.assertThat()
+			.body("size()", greaterThan(0));
+	}
+	
+	
+	// PUT /eventos/{id}
+	@Test
+	public void shouldUpdateEventoWithStatus200() {
+		Evento evento = new Evento();
+		evento.setNombre("eventitoUpdate2");
+		evento.setDescripcionCorta("dcorta");
+		evento.setDescripcionLarga("dlarga");
+		evento.setFotoUrl("m.jpg");
+		evento.setGenero("pop");
+		evento.setFechaEvento(LocalDate.now());
+		evento.setHoraEvento("20:00");
+		evento.setPoliticaAcceso("pacc");
+		evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
+		evento.setRecinto(new Recinto("a", "b", "c", 10));
 		
-
+		given()
+			.contentType("application/json")
+			.body(evento)	
+		.when()
+			.put("/61f112f0670e7222a44331bd")
+		.then()
+			.statusCode(200)
+			.body("genero", equalTo("pop"));
+			
+	}
+	
+	// PUT /eventos/{id}
+		@Test
+		public void shouldUpdateEventoWithStatus400() {
+			Evento evento = new Evento();
+			evento.setNombre("");
+			evento.setDescripcionCorta("dcorta");
+			evento.setDescripcionLarga("dlarga");
+			evento.setFotoUrl("m.jpg");
+			evento.setGenero("rock");
+			evento.setFechaEvento(LocalDate.now());
+			evento.setHoraEvento("20:00");
+			evento.setPoliticaAcceso("pacc");
+			evento.setRangoPrecios(new float[] {(float) 1.1, (float) 2.2});
+			evento.setRecinto(new Recinto("a", "b", "c", 10));
+			
+			given()
+				.contentType("application/json")
+				.body(evento)	
+			.when()
+				.put("/abcdf1234")
+			.then()
+				.statusCode(400)
+				.body("nombre", equalTo(null));		
+		}
+	
 }

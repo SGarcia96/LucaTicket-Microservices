@@ -33,6 +33,7 @@ public class EntradaControllerTests {
 		.then()
 			.statusCode(200);
 	}
+
 	
 	@Test
 	public void shouldAddEntradaWithStatus201() {
@@ -93,5 +94,6 @@ public class EntradaControllerTests {
 			.body("message",equalTo("aforo completo"));
 	}
 	
+
 }
 
