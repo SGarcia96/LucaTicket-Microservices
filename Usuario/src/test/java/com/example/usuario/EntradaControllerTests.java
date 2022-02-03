@@ -23,7 +23,7 @@ public class EntradaControllerTests {
 	@BeforeAll
 	public static void setup() {
 		baseURI = "http://localhost:8888";
-		basePath = "/entrada";
+		
 	}
 	
 	@Test
@@ -70,5 +70,28 @@ public class EntradaControllerTests {
 			.body("error", equalTo("BAD_REQUEST"))
 			.body("message[0]",equalTo("evento: Necesitamos que se indique el evento"));
 	}
+	
+	@Test
+	public void shouldReturnAnErrorMessageAndStatus451() {
+		logger.info("----TEST AFORO COMPLETO-----");
+		
+		
+		
+		String token = given()
+				.contentType("application/json")
+			.when()
+				.post("usuarios/login?usuario=eva@gmail.com&password=eva123").asString();
+		
+		given()
+			.header("Authorization", token)
+			
+		.when()
+			.post("entrada/1/add?idEvento=61fbb930f5872b74eb7ad023")
+		.then()
+			.statusCode(451)
+			.body("status", equalTo("UNAVAILABLE_FOR_LEGAL_REASONS"))
+			.body("message",equalTo("aforo completo"));
+	}
+	
 }
 
