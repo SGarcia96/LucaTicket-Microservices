@@ -103,5 +103,45 @@ public class UsuarioControllerTests {
 		.then()
 			.body("apellido", equalTo("montiel"));
 	}
+	
+	@Test
+	public void shouldDeleteUsuarioStatus404() {
+		String token = given()
+			.contentType("application/json")
+		.when()
+			.post("/login?usuario=eva@gmail.com&password=eva123").asString();
+		given()
+			.header("Authorization", token)
+			.delete("/11111")
+		.then()
+			.statusCode(404);
+	}
+	
+	@Test
+	public void shouldUpdateUsuarioStatus404() {
+		Usuario usuario = new Usuario();
+		
+		usuario.setNombre("Juan");
+		usuario.setApellido("Martinez");
+		usuario.setMail("j.martino@gmail.com");
+		usuario.setPassword("12345");
+		usuario.setFechaAlta(LocalDate.now(ZoneId.of("Europe/Madrid")));
+		logger.info(usuario.toString());
+
+			String token = given()
+				.contentType("application/json")
+			.when()
+				.post("/login?usuario=eva@gmail.com&password=eva123").asString();	
+				
+			given()
+				.header("Authorization", token)
+				.contentType("application/json")
+				.body(usuario)
+			.when()
+				.put("/11111")
+			.then()
+				.statusCode(404);
+	}
+	
 }
 
