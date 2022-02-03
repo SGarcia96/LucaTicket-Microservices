@@ -15,5 +15,9 @@ public class EntradaNotFoundException extends RuntimeException {
 	public EntradaNotFoundException(Long id) {
 		super("Epic Fail: No existe la entrada " + id);
 	}
+	
+	public EntradaNotFoundException(int aforo) {
+		super("Epic Fail: Aforo completo " + aforo);
+	}
 
 }
