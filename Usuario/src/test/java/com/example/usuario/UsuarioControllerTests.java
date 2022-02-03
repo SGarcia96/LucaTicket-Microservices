@@ -91,17 +91,31 @@ public class UsuarioControllerTests {
 	}
 	
 	@Test
+	public void shouldReturn400WhenTryToLogWithIncorrectPassword() {
+		logger.info("----TEST LOGIN 400------");
+		given()
+			.contentType("application/json")
+		.when()
+			.post("/login?usuario=eva@gmail.com&password=eva12")
+		.then()
+			.statusCode(400)
+			.body("status", equalTo(400))
+			.body("error", equalTo("Bad Request"))
+			.body("message", equalTo("Epic Fail: Contraseña incorrecta"));
+	}
+	
+	@Test
 	public void shouldGetUsuarioByIdWithStatus200(){
 		String token = given()
 			.contentType("application/json")
 		.when()
-			.post("/login?usuario=eva@gmail.com&password=eva123").asString();
+			.post("/login?usuario=eva@gmail.com&password=eva12").asString();
 		
 		given()
 			.header("Authorization", token)
 			.get("/1")
 		.then()
-			.body("apellido", equalTo("montiel"));
+			.statusCode(0);
 	}
 }
 
