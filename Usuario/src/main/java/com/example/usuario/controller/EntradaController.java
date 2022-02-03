@@ -1,14 +1,12 @@
 package com.example.usuario.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.usuario.feignclients.EventoFeignClient;
-
 import com.example.usuario.model.Entrada;
-import com.example.usuario.model.EventoDTO;
-import com.example.usuario.model.MensajePago;
 import com.example.usuario.service.EntradaService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,9 +34,6 @@ public class EntradaController {
 
 	@Autowired
 	private EntradaService entradaService;
-	
-	@Autowired
-	private EventoFeignClient eventoFeign;
 
 	@Operation(summary = "Buscar todas las entradas", description = "", tags = { "entrada" })
 	@ApiResponses(value = {
@@ -59,25 +50,18 @@ public class EntradaController {
 
 	@Operation(summary = "Añade una nueva Entrada", description = "Añade una entrada a la base de datos", tags = {
 			"entrada" })
-	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Entrada añadida", content = {
-			@Content(mediaType = "application/json", schema = @Schema(implementation = Entrada.class)) }),
-	@ApiResponse(responseCode = "406", description = "Tarjeta caducada", content = @Content),
-	@ApiResponse(responseCode = "406", description = "Datos incorrectos", content = @Content), 
-	@ApiResponse(responseCode = "417", description = "Saldo insuficiente", content = @Content),
-	@ApiResponse(responseCode = "451", description = "Aforo completo", content = @Content)}) 
+	@ApiResponses(value = { 
+			@ApiResponse(responseCode = "201", description = "Entrada añadida", content = {
+				@Content(mediaType = "application/json", schema = @Schema(implementation = Entrada.class)) }),
+			@ApiResponse(responseCode = "406", description = "Tarjeta caducada", content = @Content),
+			@ApiResponse(responseCode = "406", description = "Datos incorrectos", content = @Content), 
+			@ApiResponse(responseCode = "417", description = "Saldo insuficiente", content = @Content),
+			@ApiResponse(responseCode = "451", description = "Aforo completo", content = @Content)}) 
 	@PostMapping("/{id}/add")
 	public ResponseEntity<?> addEntrada2(@PathVariable("id") Long id, @RequestParam String idEvento) {
-		MensajePago mensajePago = entradaService.addEntrada(id, idEvento);
-		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("timestamp", new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
-		body.put("message", mensajePago.getMensaje());
-		body.put("status", mensajePago.getCodigo().value());
-		if(mensajePago.getCodigo().value() == 200) {
-			EventoDTO evento = eventoFeign.getEvento(idEvento);
-			body.put("evento", evento);
-		}
-		
-		return new ResponseEntity<>(body, mensajePago.getCodigo());
+		log.info("--- comprar entrada");
+		Map<String, Object> body = entradaService.addEntrada(id, idEvento);
+		return new ResponseEntity<>(body, (HttpStatus)body.get("status"));
 	}
 
 }

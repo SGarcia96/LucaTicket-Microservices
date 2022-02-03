@@ -41,6 +41,8 @@ public class PagoController {
 			@ApiResponse(responseCode = "451", description = "Aforo completo", content = @Content)}) 
 	@GetMapping(value = "/aforoTotal/{aforoTotal}/entradasVendidas/{entradasVendidas}/precio/{precio}")
 	public MensajePago verificaPago(@PathVariable int aforoTotal, @PathVariable int entradasVendidas, @PathVariable float precio) {
+		log.info("------- en verificaPago del controller");
+		
 		return pagoService.generaMensajeDePago(aforoTotal, entradasVendidas, precio, RandomTarjeta.creaTarjeta());
 	}
 }

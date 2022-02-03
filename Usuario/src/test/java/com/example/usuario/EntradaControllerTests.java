@@ -33,42 +33,5 @@ public class EntradaControllerTests {
 		.then()
 			.statusCode(200);
 	}
-	
-	@Test
-	public void shouldAddEntradaWithStatus201() {
-		logger.info("----TEST ENTRADA CREADA-----");
-		Entrada entrada = new Entrada();
-		entrada.setEvento(new EventoDTO());
-		entrada.setUsuario(16);
-		logger.info(entrada.toString());
-		
-		given()
-			.contentType("application/json")
-			.body(entrada)
-		.when()
-			.post()
-		.then()
-			.statusCode(201)
-			.body("evento", equalTo("eventillo"));
-	}
-
-	@Test
-	public void shouldReturnAnErrorMessageAndStatus400() {
-		logger.info("----TEST CAMPO VACIO-----");
-		Entrada entrada = new Entrada();
-		entrada.setUsuario(1111111111);
-		//No se inserta evento
-		logger.info(entrada.toString());
-		
-		given()
-			.contentType("application/json")
-			.body(entrada)
-		.when()
-			.post()
-		.then()
-			.statusCode(400)
-			.body("error", equalTo("BAD_REQUEST"))
-			.body("message[0]",equalTo("evento: Necesitamos que se indique el evento"));
-	}
 }
 
